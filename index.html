@@ -758,6 +758,7 @@ em { font-style: normal; background: linear-gradient(transparent 58%, var(--lime
                   <a class="btn btn-primary" id="gcalLink" target="_blank" rel="noopener">Add to Google Calendar</a>
                   <a class="btn btn-ghost" id="waLink" target="_blank" rel="noopener">Message us on WhatsApp</a>
                 </div>
+                <a class="link" href="dashboard/#appointments">See this booking in the clinic dashboard →</a>
                 <button class="link" id="bookAnother">Book another appointment</button>
               </div>
             </div>
@@ -813,7 +814,7 @@ em { font-style: normal; background: linear-gradient(transparent 58%, var(--lime
     </div>
     <div class="container foot-bottom">
       <small>© <span id="yr"></span> <span data-bind="clinic.name"></span>. All rights reserved.</small>
-      <small>Demo website · Sample content</small>
+      <small><a href="dashboard/">Clinic dashboard (demo) →</a></small>
     </div>
     <div class="footer-word" aria-hidden="true">AURELIA<span>.</span></div>
   </footer>
@@ -825,62 +826,36 @@ em { font-style: normal; background: linear-gradient(transparent 58%, var(--lime
   
   
 
+<script src="assets/config.js"></script>
+<script src="assets/demo-store.js"></script>
 <script>
 (() => {
-  const DATA = {"clinic":{"name":"Aurelia Dental","tagline":"Precision dentistry, designed around you.","area":"Sushant Lok, Gurugram","address":"C-Block, Sushant Lok Phase I, Sector 43, Gurugram, Haryana 122009","phone":"+91 90000 00000","whatsapp":"919000000000","email":"hello@aureliadental.in","mapQuery":"Sushant Lok Phase 1, Sector 43, Gurugram","timezone":"Asia/Kolkata"},"hours":{"0":{"open":"10:00","close":"14:00"},"1":{"open":"10:00","close":"20:00"},"2":{"open":"10:00","close":"20:00"},"3":{"open":"10:00","close":"20:00"},"4":{"open":"10:00","close":"20:00"},"5":{"open":"10:00","close":"20:00"},"6":{"open":"10:00","close":"18:00"}},"lunchBreak":{"start":"14:00","end":"15:00"},"categories":[{"id":"preventive","label":"Preventive"},{"id":"restorative","label":"Restorative"},{"id":"cosmetic","label":"Cosmetic"},{"id":"orthodontic","label":"Orthodontics"},{"id":"implants","label":"Implants"},{"id":"surgical","label":"Surgery & Gums"}],"treatments":[{"id":"consult","name":"Consultation & Digital Check-up","category":"preventive","icon":"scan","duration":30,"priceFrom":500,"priceTo":500,"unit":"visit","popular":true,"blurb":"Full oral exam, intra-oral scan and a written treatment plan with transparent estimates.","concerns":["Toothache or sensitivity"]},{"id":"cleaning","name":"Painless Cleaning & Polishing","category":"preventive","icon":"sparkle","duration":45,"priceFrom":1500,"priceTo":3000,"unit":"session","blurb":"Ultrasonic scaling and air-polishing to remove plaque and tartar, plus home-care coaching.","concerns":["Plaque or tartar buildup"]},{"id":"kids","name":"Children's Dentistry","category":"preventive","icon":"smile","duration":30,"priceFrom":800,"priceTo":4000,"unit":"visit","blurb":"Gentle check-ups, fluoride, sealants and cavity care in a calm, kid-friendly setting.","concerns":["Dental concerns involving a child"]},{"id":"filling","name":"Tooth-Coloured Fillings","category":"restorative","icon":"tooth","duration":30,"priceFrom":1200,"priceTo":3500,"unit":"tooth","blurb":"Composite restorations that match your natural shade and seal out further decay.","concerns":["A broken or weakened tooth"]},{"id":"rct","name":"Single-Visit Root Canal","category":"restorative","icon":"bolt","duration":90,"priceFrom":5500,"priceTo":12000,"unit":"tooth","popular":true,"blurb":"Rotary endodontics under local anaesthesia, often completed in a single sitting.","concerns":["Possible tooth infection"]},{"id":"crowns","name":"Crowns & Bridges","category":"restorative","icon":"crown","duration":60,"priceFrom":6000,"priceTo":22000,"unit":"unit","blurb":"Zirconia and E.max crowns milled with digital precision to protect weak teeth or replace gaps.","concerns":["A broken or weakened tooth","Missing teeth"]},{"id":"whitening","name":"Professional Teeth Whitening","category":"cosmetic","icon":"sun","duration":60,"priceFrom":8000,"priceTo":18000,"unit":"session","blurb":"In-chair whitening that lifts several shades in about an hour, with sensitivity care.","concerns":["Discoloured or uneven-looking teeth"]},{"id":"veneers","name":"Veneers & Lumineers","category":"cosmetic","icon":"gem","duration":60,"priceFrom":10000,"priceTo":25000,"unit":"tooth","blurb":"Ultra-thin porcelain shells that reshape and brighten your smile with minimal prep.","concerns":["Discoloured or uneven-looking teeth"]},{"id":"smile","name":"Digital Smile Design & Makeover","category":"cosmetic","icon":"wand","duration":60,"priceFrom":35000,"priceTo":300000,"unit":"plan","popular":true,"blurb":"Preview your new smile on screen before treatment, then combine whitening, veneers and alignment.","concerns":["Discoloured or uneven-looking teeth"]},{"id":"braces","name":"Orthodontic Braces","category":"orthodontic","icon":"grid","duration":45,"priceFrom":35000,"priceTo":85000,"unit":"full case","blurb":"Metal, ceramic and self-ligating braces for crowding, gaps and bite correction.","concerns":["Crowded or misaligned teeth"]},{"id":"aligners","name":"Clear Aligners","category":"orthodontic","icon":"layers","duration":45,"priceFrom":90000,"priceTo":250000,"unit":"full case","popular":true,"blurb":"Removable, near-invisible trays planned in 3D so you see the end result on day one.","concerns":["Crowded or misaligned teeth"]},{"id":"implant","name":"Single Tooth Implant","category":"implants","icon":"pillar","duration":90,"priceFrom":28000,"priceTo":65000,"unit":"tooth incl. crown","popular":true,"blurb":"Premium titanium implants placed with CBCT-guided surgery for a fixed, natural-feeling tooth.","concerns":["Missing teeth"]},{"id":"allon4","name":"All-on-4 / Full-Mouth Implants","category":"implants","icon":"arch","duration":120,"priceFrom":250000,"priceTo":450000,"unit":"arch","blurb":"A full fixed arch on four to six implants, often with teeth the same day.","concerns":["Missing teeth"]},{"id":"dentures","name":"Dentures","category":"implants","icon":"arch","duration":60,"priceFrom":15000,"priceTo":60000,"unit":"arch","blurb":"Comfortable, natural-looking removable or implant-retained dentures.","concerns":["Missing teeth"]},{"id":"wisdom","name":"Wisdom Tooth Extraction","category":"surgical","icon":"scissors","duration":60,"priceFrom":3000,"priceTo":12000,"unit":"tooth","blurb":"Careful removal of impacted or problem wisdom teeth with imaging-led planning.","concerns":["Toothache or sensitivity"]},{"id":"gums","name":"Gum Treatment & Laser Care","category":"surgical","icon":"leaf","duration":60,"priceFrom":4000,"priceTo":25000,"unit":"quadrant","blurb":"Deep cleaning, periodontal therapy and soft-tissue laser for bleeding or receding gums.","concerns":["Bleeding or swollen gums"]}],"stats":[{"value":"12k+","label":"Smiles treated"},{"value":"4.9","label":"Average patient rating"},{"value":"18","label":"Specialists on call"},{"value":"0","label":"Hidden charges"}],"doctors":[{"name":"Dr. Ananya Rao","role":"Implantologist & Founder","creds":"BDS, MDS (Prosthodontics)","years":15},{"name":"Dr. Kabir Mehta","role":"Orthodontist","creds":"BDS, MDS (Orthodontics)","years":11},{"name":"Dr. Ira Kapoor","role":"Endodontist","creds":"BDS, MDS (Conservative & Endo)","years":9},{"name":"Dr. Vihaan Sethi","role":"Oral & Maxillofacial Surgeon","creds":"BDS, MDS (OMFS)","years":12}],"testimonials":[{"name":"Riya S.","treatment":"Clear Aligners","text":"They showed me my final smile in 3D before we even started. Ten months later it looks exactly like the preview."},{"name":"Arjun M.","treatment":"Single-Visit Root Canal","text":"Walked in with throbbing pain at 11, walked out pain-free by 1. The estimate they gave me was the bill I paid."},{"name":"Neha & Karan","treatment":"Implants","text":"Booking online took two minutes and the reminders were spot on. The clinic feels more like a spa than a hospital."}],"faqs":[{"q":"How much does treatment cost?","a":"Every treatment on this page lists a starting range. Your exact estimate depends on clinical complexity and materials, and you get it in writing after your consultation, before any work begins."},{"q":"Is root canal treatment painful?","a":"We use local anaesthesia and rotary instruments, so most patients feel pressure rather than pain. Mild tenderness for a day or two afterwards is normal."},{"q":"Am I suitable for dental implants?","a":"Most adults with missing teeth are, but it depends on gum health, bone volume and medical history. A CBCT scan at your consultation tells us for sure."},{"q":"Aligners or braces: which is better?","a":"Neither is best for everyone. Aligners suit many mild-to-moderate cases and are discreet; braces handle a wider range of complex movements. We show you both plans."},{"q":"Do you offer EMI or insurance support?","a":"Yes. No-cost EMI is available on treatments above ₹15,000 through partner lenders, and we provide itemised invoices for insurance and reimbursement claims."},{"q":"How do I reschedule or cancel?","a":"Reply to your confirmation email or WhatsApp us at least 4 hours before your slot. There is no charge for rescheduling."}]};
-  const R = {"slotMinutes":30,"chairs":2,"bookingWindowDays":30,"minLeadMinutes":120};
-  const booked = [];
-  const toMin = (s) => { const [h, m] = s.split(':').map(Number); return h * 60 + m; };
-  const toHHMM = (m) => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
-  const wd = (d) => new Date(d + 'T00:00:00Z').getUTCDay();
-  const addDays = (d, n) => { const x = new Date(d + 'T00:00:00Z'); x.setUTCDate(x.getUTCDate() + n); return x.toISOString().slice(0, 10); };
-  function now() {
-    const p = new Intl.DateTimeFormat('en-CA', { timeZone: DATA.clinic.timezone, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(new Date());
-    const g = (t) => p.find((x) => x.type === t).value;
-    return { date: g('year') + '-' + g('month') + '-' + g('day'), minutes: +g('hour') * 60 + +g('minute') };
-  }
-  const dur = (id) => (DATA.treatments.find((t) => t.id === id) || { duration: R.slotMinutes }).duration;
-  function slots(date, tid) {
-    const h = DATA.hours[wd(date)]; if (!h) return [];
-    const n = now(); if (date < n.date || date > addDays(n.date, R.bookingWindowDays)) return [];
-    const d = dur(tid), lunch = wd(date) !== 0 ? [toMin(DATA.lunchBreak.start), toMin(DATA.lunchBreak.end)] : null;
-    const busy = new Map();
-    booked.filter((b) => b.date === date).forEach((b) => { for (let m = toMin(b.time); m < toMin(b.time) + dur(b.treatment); m += R.slotMinutes) busy.set(m, (busy.get(m) || 0) + 1); });
-    const out = [];
-    for (let t = toMin(h.open); t + d <= toMin(h.close); t += R.slotMinutes) {
-      if (lunch && t < lunch[1] && t + d > lunch[0]) continue;
-      if (date === n.date && t < n.minutes + R.minLeadMinutes) continue;
-      let ok = true; for (let m = t; m < t + d; m += R.slotMinutes) if ((busy.get(m) || 0) >= R.chairs) ok = false;
-      if (ok) out.push(toHHMM(t));
-    }
-    return out;
-  }
+  const S = window.DemoStore;
   const json = (body, status = 200) => Promise.resolve(new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } }));
   const realFetch = window.fetch.bind(window);
+  const PHONE = /^\+?[0-9\s-]{8,16}$/, EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   window.fetch = (url, opts = {}) => {
     if (typeof url !== 'string' || !url.startsWith('/api/')) return realFetch(url, opts);
-    const u = new URL(url, 'https://preview.local');
-    if (u.pathname === '/api/clinic') return json(DATA);
+    const u = new URL(url, 'https://demo.local');
+    if (u.pathname === '/api/clinic') return json(S.cfg);
     if (u.pathname === '/api/availability') {
       const t = u.searchParams.get('treatment'), d = u.searchParams.get('date');
-      if (d) return json({ date: d, slots: slots(d, t) });
-      const today = now().date;
-      return json({ days: Array.from({ length: 14 }, (_, i) => { const date = addDays(today, i); return { date, weekday: wd(date), slots: slots(date, t).length }; }) });
+      return d ? json({ date: d, slots: S.availableSlots(d, t) }) : json({ days: S.availability(t) });
     }
     const b = JSON.parse(opts.body || '{}');
     if (u.pathname === '/api/appointments') {
       const fields = {};
       if (!b.name || b.name.trim().length < 2) fields.name = 'Please enter your name';
-      if (!/^\+?[0-9\s-]{8,16}$/.test(b.phone || '')) fields.phone = 'Please enter a valid phone number';
-      if (b.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email)) fields.email = 'Please enter a valid email';
+      if (!PHONE.test(b.phone || '')) fields.phone = 'Please enter a valid phone number';
+      if (b.email && !EMAIL.test(b.email)) fields.email = 'Please enter a valid email';
       if (Object.keys(fields).length) return json({ error: 'Please check the form', fields }, 400);
-      if (!slots(b.date, b.treatment).includes(b.time)) return json({ error: 'That slot was just taken. Please pick another time.' }, 409);
-      booked.push({ date: b.date, time: b.time, treatment: b.treatment });
-      const ref = 'AD-' + Math.random().toString(16).slice(2, 8).toUpperCase();
-      return json({ ref, date: b.date, time: b.time }, 201);
+      try { const a = S.book({ ...b, name: b.name.trim(), source: 'website' }); return json({ ref: a.ref, date: a.date, time: a.time }, 201); }
+      catch (e) { return json({ error: e.message }, e.status || 400); }
     }
     if (u.pathname === '/api/callbacks') {
-      if (!b.name || b.name.trim().length < 2 || !/^\+?[0-9\s-]{8,16}$/.test(b.phone || '')) return json({ error: 'Please enter your name and a valid phone number' }, 400);
+      if (!b.name || b.name.trim().length < 2 || !PHONE.test(b.phone || '')) return json({ error: 'Please enter your name and a valid phone number' }, 400);
+      const p = S.findOrCreatePatient({ name: b.name.trim(), phone: b.phone });
+      S.log({ patientId: p.id, channel: 'sms', kind: 'callback', body: 'Callback requested from the website' + (b.concern ? ': ' + b.concern : '') });
       return json({ ok: true }, 201);
     }
     return json({ error: 'Not found' }, 404);
