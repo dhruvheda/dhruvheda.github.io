@@ -18,6 +18,13 @@ button { cursor: pointer; background: none; border: 0; }
 h1, h2, h3, h4 { font-family: var(--display); letter-spacing: -0.03em; line-height: 1.1; font-weight: 800; }
 .num { font-variant-numeric: tabular-nums; }
 
+/* Sign-in */
+.login-wrap { min-height: 100vh; display: grid; place-items: center; padding: 16px; }
+.login { width: min(400px, 100%); display: grid; gap: 14px; padding: 28px; }
+.login .brand { color: var(--ink); padding: 0; }
+.login h1 { font-size: 28px; }
+.login code { font-size: 12px; background: var(--sheet); padding: 1px 5px; border-radius: 6px; }
+
 /* Layout */
 .app { display: grid; grid-template-columns: 232px 1fr; min-height: 100vh; }
 .side { background: var(--ink); color: #fff; padding: 22px 14px; display: flex; flex-direction: column; gap: 24px; position: sticky; top: 0; height: 100vh; }
@@ -239,7 +246,7 @@ label.f small { color: var(--muted); font-weight: 400; }
 .msg { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); align-items: start; }
 .msg:last-child { border-bottom: 0; }
 .msg .ch { width: 34px; height: 34px; border-radius: 50%; background: var(--sheet); display: grid; place-items: center; font-size: 11px; font-weight: 700; }
-.msg p { color: var(--ink-2); font-size: 13.5px; }
+.msg p { color: var(--ink-2); font-size: 13.5px; white-space: pre-line; }
 .msg small { color: var(--muted); font-size: 12px; }
 
 /* Toast */

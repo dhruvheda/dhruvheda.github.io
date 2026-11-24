@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
-  <title>Aurelia Dental · Clinic Dashboard</title>
+  <title>Clinic Dashboard (Demo) · Aurelia Dental</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
@@ -12,7 +12,18 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='9' fill='%23111214'/><path d='M10 9c2-1.5 4-1 6 0 2-1 4-1.5 6 0 2 2 1.5 6 .5 8.5-.8 2.2-1 6-2.5 6.5-1.6.6-1.8-4-4-4s-2.4 4.6-4 4c-1.5-.5-1.7-4.3-2.5-6.5C8.5 15 8 11 10 9z' fill='%23d4f45a'/></svg>" />
 </head>
 <body>
-  <div class="app">
+  <section class="login-wrap" id="login" hidden>
+    <form class="login card" id="loginForm">
+      <a class="brand" href="../"><span class="brand-mark"></span><span>Aurelia<b>.</b></span></a>
+      <h1>Clinic dashboard</h1>
+      <p class="hint">Sign in with the clinic's access key (the <code>ADMIN_TOKEN</code> set on the server).</p>
+      <label class="f">Access key<input class="in" type="password" id="loginToken" autocomplete="current-password" required /></label>
+      <p class="err-msg" id="loginErr" role="alert"></p>
+      <button class="btn dark">Sign in</button>
+    </form>
+  </section>
+
+  <div class="app" hidden>
     <aside class="side">
       <a class="brand" href="../"><span class="brand-mark"></span><span>Aurelia<b>.</b></span></a>
       <nav class="side-nav" id="nav">
@@ -63,6 +74,7 @@
   <div id="print"></div>
 
   <script src="../assets/config.js"></script>
+  <script src="../assets/store-core.js"></script>
   <script src="../assets/demo-store.js"></script>
   <script src="dashboard.js"></script>
 </body>

@@ -1,5 +1,20 @@
 (() => {
-  const S = window.DemoStore, cfg = S.cfg, money = S.money;
+  const S = window.DemoStore;
+  let cfg, money; // set once the store is ready (after sign-in in live mode)
+  const DEMO = S.mode === 'demo';
+  // Toast suffix that keeps demo actions honest.
+  const demoNote = (txt) => (DEMO ? ` <i>(demo: ${txt})</i>` : '');
+  // Human result for a message the server tried to deliver.
+  const chName = { whatsapp: 'WhatsApp', email: 'email', sms: 'SMS' };
+  function delivery(r, ch, who) {
+    const st = (r && r.status) || 'sent';
+    if (DEMO) return `Sent on ${chName[ch]} to ${who}${demoNote('logged, not actually sent')}`;
+    if (st === 'sent') return `Sent on ${chName[ch]} to ${who}`;
+    if (st === 'logged') return `Recorded, but not delivered: ${chName[ch]} isn't connected yet`;
+    if (st === 'skipped') return `Not sent: ${esc(r.error || 'no address for this channel')}`;
+    return `Sending failed: ${esc(r.error || 'unknown error')}`;
+  }
+  const fail = (e) => toast(`<b>Couldn't do that.</b> ${esc(e.message || e)}`, 5000);
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -13,9 +28,10 @@
   };
   const shortDate = (ds) => { const d = new Date(ds + 'T00:00:00'); return `${d.getDate()} ${['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()]}`; };
   const statusLabel = (s) => ({ confirmed: 'Confirmed', completed: 'Completed', no_show: 'No-show', cancelled: 'Cancelled', paid: 'Paid', unpaid: 'Unpaid' }[s] || s);
-  const kindLabel = { callback: 'Callback request', confirmation: 'Booking confirmation', reminder: 'Reminder', receipt: 'Receipt', offer: 'Offer', followup: 'Follow-up', message: 'Message' };
+  const kindLabel = { callback: 'Callback request', confirmation: 'Booking confirmation', reminder: 'Reminder', receipt: 'Receipt', offer: 'Offer', followup: 'Follow-up', recall: 'Recall', payment_link: 'Payment link', message: 'Message', inbound: 'Patient reply' };
+  const msgStatus = { sent: ['sent', 'Sent'], logged: ['scheduled', 'Not delivered'], skipped: ['cancelled', 'Skipped'], failed: ['bad', 'Failed'], received: ['confirmed', 'Received'] };
   const chLabel = { whatsapp: 'WA', sms: 'SMS', email: '@' };
-  const invoiceFor = (apptId) => S.state.invoices.find((i) => i.appointmentId === apptId);
+  const invoiceFor = (apptId) => S.invoiceFor(apptId);
 
   const ui = { apptFilter: 'today', apptQ: '', patQ: '', patTag: '', billFilter: 'all', billQ: '', msgKind: 'all', week: 0 };
   let current = 'overview';
@@ -219,7 +235,7 @@
             <td>${esc(i.items.map((it) => it.name + (it.qty > 1 ? ` ×${it.qty}` : '')).join(', '))}${i.discount ? `<small>${esc(i.discount.code || 'Discount')} −${money(i.discountAmt)}</small>` : ''}</td>
             <td class="r num"><b>${money(i.total)}</b>${i.payment ? `<small>${esc(i.payment.mode)}</small>` : ''}</td>
             <td><span class="pill ${i.status}">${statusLabel(i.status)}</span></td>
-            <td class="r">${i.status === 'paid' ? `<button class="btn sm ghost" data-action="receipt" data-id="${i.id}">Receipt</button>` : `<button class="btn sm lime" data-action="collect" data-id="${i.id}">Collect</button>`}</td>
+            <td class="r">${i.status === 'paid' ? `<button class="btn sm ghost" data-action="receipt" data-id="${i.id}">Receipt</button>` : `<button class="btn sm lime" data-action="collect" data-id="${i.id}">Collect</button> <button class="btn sm ghost" data-action="void" data-id="${i.id}" title="Void this bill">Void</button>`}</td>
           </tr>`; }).join('')}
         </tbody></table>`;
       },
@@ -248,11 +264,12 @@
       title: 'Messages',
       render() {
         const st = S.state.settings, rem = S.reminders();
-        const f = [['all', 'All'], ['confirmation', 'Confirmations'], ['reminder', 'Reminders'], ['receipt', 'Receipts'], ['offer', 'Offers'], ['message', 'Direct']];
+        const f = [['all', 'All'], ['confirmation', 'Confirmations'], ['reminder', 'Reminders'], ['receipt', 'Receipts'], ['offer', 'Offers'], ['message', 'Direct'], ['callback', 'Callbacks']];
+        const pending = rem.filter((r) => !r.sent);
         return `
         <div class="grid two">
           <div class="card">
-            <div class="card-h"><div><h3>Outbox</h3><p>Every message the clinic system sent (simulated in demo)</p></div></div>
+            <div class="card-h"><div><h3>Outbox</h3><p>${DEMO ? 'Every message the clinic system sent (simulated in demo)' : (S.integrations.whatsapp ? 'Every message sent to patients, with delivery status' : 'WhatsApp isn\'t connected yet: messages are recorded but not delivered')}</p></div></div>
             <div class="toolbar"><div class="seg">${f.map(([k, l]) => `<button class="${ui.msgKind === k ? 'on' : ''}" data-action="msg-filter" data-k="${k}">${l}</button>`).join('')}</div></div>
             <div id="list">${this.list()}</div>
           </div>
@@ -266,8 +283,8 @@
               </div>
             </div>
             <div class="card">
-              <div class="card-h"><div><h3>Tomorrow's reminders</h3><p>${st.dayBefore ? `${rem.length} scheduled for 10:00 AM` : 'Reminders are switched off'}</p></div>${st.dayBefore && rem.length ? '<button class="btn sm lime" data-action="send-reminders">Send now</button>' : ''}</div>
-              ${st.dayBefore ? (rem.length ? rem.map((r) => `<div class="msg"><span class="ch">WA</span><div><b>${esc(r.patient.name)}</b><p>${esc(r.body)}</p></div><span class="pill scheduled">Scheduled</span></div>`).join('') : '<p class="empty">No appointments tomorrow.</p>') : ''}
+              <div class="card-h"><div><h3>Tomorrow's reminders</h3><p>${st.dayBefore ? `${pending.length} to send automatically at 10:00 AM` : 'Reminders are switched off'}</p></div>${st.dayBefore && pending.length ? '<button class="btn sm lime" data-action="send-reminders">Send now</button>' : ''}</div>
+              ${st.dayBefore ? (rem.length ? rem.map((r) => `<div class="msg"><span class="ch">WA</span><div><b>${esc(r.patient.name)}</b><p>${esc(r.body)}</p></div>${r.sent ? '<span class="pill sent">Done</span>' : '<span class="pill scheduled">Scheduled</span>'}</div>`).join('') : '<p class="empty">No appointments tomorrow.</p>') : ''}
             </div>
           </div>
         </div>`;
@@ -275,7 +292,7 @@
       list() {
         const rows = S.state.messages.filter((m) => ui.msgKind === 'all' || m.kind === ui.msgKind).slice(0, 80);
         if (!rows.length) return '<p class="empty">Nothing here yet.</p>';
-        return rows.map((m) => { const p = S.patient(m.patientId); return `<div class="msg"><span class="ch">${chLabel[m.channel] || '•'}</span><div><b>${esc(p ? p.name : '')}</b> <small>· ${esc(kindLabel[m.kind] || m.kind)} · ${ago(m.at)}</small><p>${esc(m.body)}</p></div><span class="pill sent">Sent</span></div>`; }).join('');
+        return rows.map((m) => { const p = S.patient(m.patientId); return `<div class="msg"><span class="ch">${chLabel[m.channel] || '•'}</span><div><b>${esc(p ? p.name : '')}</b> <small>· ${esc(kindLabel[m.kind] || m.kind)} · ${ago(m.at)}</small><p>${esc(m.body)}</p>${m.error ? `<small style="color:var(--bad)">${esc(m.error)}</small>` : ''}</div><span class="pill ${(msgStatus[m.status] || msgStatus.sent)[0]}">${(msgStatus[m.status] || msgStatus.sent)[1]}</span></div>`; }).join('');
       },
     },
   };
@@ -360,15 +377,15 @@
     };
     $('#apPatient').onchange = (e) => { $('#newPat').hidden = e.target.value !== '__new'; };
     $('#apTr').onchange = fill; $('#apDate').onchange = fill; fill();
-    $('#apptForm').onsubmit = (e) => {
+    $('#apptForm').onsubmit = async (e) => {
       e.preventDefault();
       const f = Object.fromEntries(new FormData(e.target));
       try {
         if (f.patient === '__new' && (f.name.trim().length < 2 || f.phone.replace(/\D/g, '').length < 10)) throw new Error('Enter the new patient\'s name and a 10-digit phone number.');
         if (!f.time) throw new Error('Pick a date with free slots.');
-        const a = S.book({ ...f, patientId: f.patient === '__new' ? null : f.patient });
+        const a = await S.book({ ...f, patientId: f.patient === '__new' ? null : f.patient });
         closeModal();
-        toast(`Booked <b>${esc(S.patient(a.patientId).name)}</b> for ${S.fmtDate(a.date)}, ${S.fmtTime(a.time)} · added to Google Calendar <i>(demo)</i>`);
+        toast(`Booked <b>${esc(S.patient(a.patientId).name)}</b> for ${S.fmtDate(a.date)}, ${S.fmtTime(a.time)}${DEMO ? ' · added to Google Calendar' + demoNote('simulated') : S.integrations.googleCalendar ? ' · added to Google Calendar' : ''}`);
       } catch (err) { $('#apErr').textContent = err.message; }
     };
   }
@@ -430,10 +447,11 @@
       m.discount = { kind: r.offer.kind, value: r.offer.value, code: r.offer.code }; $('#blDisc').value = '';
       msg.className = 'ok-msg'; msg.textContent = `${r.offer.title}: ${S.offerLabel(r.offer)} off applied.`; drawSum();
     };
-    m.save = (pay) => {
+    m.save = async (pay) => {
       const p = $('#blPatient').value;
       if (!p) { $('#blErr').textContent = 'Choose the patient for this bill.'; return; }
-      const inv = S.createInvoice({ patientId: p, appointmentId: appointmentId || null, date: T(), items: m.items.map(({ treatmentId, name, qty, price }) => ({ treatmentId, name, qty, price })), discount: m.discount, taxPct: m.taxPct });
+      let inv;
+      try { inv = await S.createInvoice({ patientId: p, appointmentId: appointmentId || null, date: T(), items: m.items.map(({ treatmentId, name, qty, price }) => ({ treatmentId, name, qty, price })), discount: m.discount, taxPct: m.taxPct }); } catch (e) { $('#blErr').textContent = e.message; return; }
       if (pay) payment(inv.id); else { closeModal(); toast(`Bill <b>${inv.no}</b> saved as unpaid · ${money(inv.total)}`); }
     };
     billEditor.m = m;
@@ -442,7 +460,8 @@
 
   function payment(invId) {
     const inv = S.invoice(invId), p = S.patient(inv.patientId);
-    const modes = [['Cash', 'At the desk'], ['UPI', 'Scan & pay'], ['Card', 'POS machine'], ['Online', 'Payment link · test']];
+    const online = DEMO || S.integrations.razorpay;
+    const modes = [['Cash', 'At the desk'], ['UPI', 'Scan & pay'], ['Card', 'POS machine'], ['Online', DEMO ? 'Payment link · test' : online ? 'Razorpay link' : 'Not connected']];
     let mode = 'UPI';
     openModal(`${head(`Collect ${money(inv.total)}`, `${inv.no} · ${esc(p.name)}`)}
       <div class="stack">
@@ -454,14 +473,32 @@
     const sync = () => {
       $$('#pm button').forEach((b) => b.classList.toggle('on', b.dataset.m === mode));
       $('#pmRefL').hidden = mode === 'Cash' || mode === 'Online';
-      $('#pmHint').textContent = mode === 'Online' ? 'Sends the patient a secure payment link (Razorpay in the live version). In this demo the payment is simulated in test mode.' : '';
-      $('#pmGo').textContent = mode === 'Online' ? 'Send link & simulate payment' : 'Mark as paid';
+      $('#pmHint').textContent = mode !== 'Online' ? '' : DEMO ? 'Sends the patient a secure payment link (Razorpay in the live version). In this demo the payment is simulated in test mode.'
+        : online ? 'Creates a Razorpay payment link and sends it on WhatsApp. The bill turns Paid automatically when the patient pays.' : 'Connect the clinic\'s Razorpay account to send payment links. Until then, use Cash, UPI or Card.';
+      $('#pmGo').textContent = mode === 'Online' ? (DEMO ? 'Send link & simulate payment' : 'Send payment link') : 'Mark as paid';
+      $('#pmGo').disabled = mode === 'Online' && !online;
     };
     $('#pm').onclick = (e) => { const b = e.target.closest('button'); if (b) { mode = b.dataset.m; sync(); } };
-    $('#pmGo').onclick = () => {
-      if (mode !== 'Online') { S.payInvoice(invId, { mode, ref: $('#pmRef').value.trim() }); receipt(invId, true); return; }
-      $('#modalBox').innerHTML = `${head('Online payment', 'Test mode · no real money moves')}<div class="checkout"><p>Waiting for ${esc(first(p.name))} to pay <b>${money(inv.total)}</b>…</p><div class="spinner"></div><p class="hint">Payment link sent on WhatsApp (simulated)</p></div>`;
-      setTimeout(() => { S.payInvoice(invId, { mode: 'Online', ref: 'pay_TEST' + Math.random().toString(36).slice(2, 12).toUpperCase() }); receipt(invId, true); }, 1600);
+    $('#pmGo').onclick = async () => {
+      $('#pmGo').disabled = true;
+      try {
+        if (mode !== 'Online') { await S.payInvoice(invId, { mode, ref: $('#pmRef').value.trim() }); receipt(invId, true); return; }
+        const r = await S.paymentLink(invId);
+        if (DEMO) {
+          $('#modalBox').innerHTML = `${head('Online payment', 'Test mode · no real money moves')}<div class="checkout"><p>Waiting for ${esc(first(p.name))} to pay <b>${money(inv.total)}</b>…</p><div class="spinner"></div><p class="hint">Payment link sent on WhatsApp (simulated)</p></div>`;
+          setTimeout(async () => { await S.payInvoice(invId, { mode: 'Online', ref: 'pay_TEST' + Math.random().toString(36).slice(2, 12).toUpperCase() }); receipt(invId, true); }, 1600);
+          return;
+        }
+        $('#modalBox').innerHTML = `${head('Payment link sent', `${inv.no} · ${money(inv.total)}`)}<div class="checkout">
+          <p>${delivery(r.message, 'whatsapp', esc(p.phone))}</p>
+          <p style="margin:14px 0"><a class="link" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.url)}</a></p>
+          <div class="spinner"></div><p class="hint">Waiting for payment. This bill turns Paid on its own when ${esc(first(p.name))} pays; you can close this window.</p></div>`;
+        const poll = setInterval(async () => {
+          if ($('#modal').hidden) return clearInterval(poll);
+          try { await S.refresh(); } catch { return; }
+          if (S.invoice(invId).status === 'paid') { clearInterval(poll); receipt(invId, true); }
+        }, 5000);
+      } catch (e) { fail(e); const b = $('#pmGo'); if (b) b.disabled = false; }
     };
     sync();
   }
@@ -481,7 +518,7 @@
         <div class="tot"><span>Total</span><span>${money(inv.total)}</span></div>
       </div>
       ${inv.status === 'paid' ? '<span class="rc-paid">PAID</span>' : ''}
-      <p class="rc-foot">Computer-generated receipt. Demo document with sample data, not valid for tax or insurance claims.</p>
+      <p class="rc-foot">${DEMO ? 'Computer-generated receipt. Demo document with sample data, not valid for tax or insurance claims.' : 'This is a computer-generated receipt and does not need a signature.'}</p>
     </div>`;
   }
 
@@ -491,7 +528,7 @@
     openModal(`${head(justPaid ? 'Payment received' : `Receipt ${inv.no}`, justPaid ? `${money(inv.total)} from ${esc(p.name)} · ${esc(inv.payment.mode)}` : esc(p.name))}
       ${receiptHTML(inv)}
       <div class="modal-f">
-        <button class="btn ghost" data-action="print" data-id="${inv.id}">Print / Save PDF</button>
+        ${S.receiptPdfUrl(inv) ? `<a class="btn ghost" href="${esc(S.receiptPdfUrl(inv))}" target="_blank" rel="noopener">Download PDF</a>` : `<button class="btn ghost" data-action="print" data-id="${inv.id}">Print / Save PDF</button>`}
         <button class="btn ghost" data-action="send-receipt" data-ch="email" data-id="${inv.id}" ${p.email ? '' : 'disabled'}>${sent('email') ? 'Sent by email ✓' : 'Email receipt'}</button>
         <button class="btn lime" data-action="send-receipt" data-ch="whatsapp" data-id="${inv.id}">${sent('whatsapp') ? 'Sent on WhatsApp ✓' : 'Send on WhatsApp'}</button>
       </div>`, true);
@@ -534,15 +571,19 @@
       armed = false; $('#ofSend').textContent = 'Send offer';
     };
     form.oninput = form.onchange = sync;
-    form.onsubmit = (e) => {
+    form.onsubmit = async (e) => {
       e.preventDefault(); read();
       if (!o.title.trim() || !o.code || !o.value) { $('#ofErr').textContent = 'Add an offer name, a discount and a code.'; return; }
       if (S.state.offers.some((x) => x.code === o.code)) { $('#ofErr').textContent = `Code ${o.code} is already used. Pick another.`; return; }
       const n = S.audience(o.audience).filter((p) => p.optIn).length;
       if (!armed) { armed = true; $('#ofSend').textContent = `Confirm: send to ${n} patient${n === 1 ? '' : 's'}`; $('#ofErr').textContent = ''; return; }
-      const sentO = S.createOffer(o);
+      let sentO;
+      try { sentO = await S.createOffer(o); } catch (err) { $('#ofErr').textContent = err.message; armed = false; $('#ofSend').textContent = 'Send offer'; return; }
       closeModal();
-      toast(`<b>${esc(sentO.code)}</b> sent to ${sentO.stats.sent} patient${sentO.stats.sent === 1 ? '' : 's'} <i>(demo: logged in Messages, nothing was actually sent)</i>`, 5500);
+      const n2 = sentO.stats.sent, who = `${n2} patient${n2 === 1 ? '' : 's'}`;
+      toast(DEMO ? `<b>${esc(sentO.code)}</b> sent to ${who}${demoNote('logged in Messages, nothing was actually sent')}`
+        : S.integrations[o.channel === 'email' ? 'email' : 'whatsapp'] ? `<b>${esc(sentO.code)}</b> is going out to ${who}. Delivery status shows in Messages.`
+        : `<b>${esc(sentO.code)}</b> recorded for ${who}, but not delivered: ${chName[o.channel]} isn't connected yet.`, 6000);
     };
     sync();
   }
@@ -563,11 +604,10 @@
         <label class="f">Message<textarea class="in" name="body" rows="4">Hi ${esc(first(p.name))}, </textarea></label>
         <div class="modal-f"><button type="button" class="btn ghost" data-action="close">Cancel</button><button class="btn dark">Send</button></div>
       </form>`);
-    $('#msgForm').onsubmit = (e) => {
+    $('#msgForm').onsubmit = async (e) => {
       e.preventDefault(); const f = Object.fromEntries(new FormData(e.target));
       if (f.body.trim().length < 3) return;
-      S.log({ patientId: pid, channel: f.channel, kind: 'message', body: f.body.trim() });
-      closeModal(); toast(`Message logged to <b>${esc(p.name)}</b> <i>(demo: not actually sent)</i>`);
+      try { const r = await S.sendMessage({ patientId: pid, channel: f.channel, body: f.body.trim() }); closeModal(); toast(delivery(r, f.channel, `<b>${esc(p.name)}</b>`)); } catch (err) { fail(err); }
     };
   }
 
@@ -605,12 +645,20 @@
     document.title = `${v.title} · Aurelia Dental`;
     $$('#nav a').forEach((a) => a.classList.toggle('active', a.dataset.view === current));
     $('#view').innerHTML = v.render();
+    renderChrome();
     v.after && v.after();
     if (drawerPid && !$('#drawer').hidden) drawDrawer();
   }
+  function renderChrome() {
+    const I = S.integrations, names = [['googleCalendar', 'Google Calendar'], ['whatsapp', 'WhatsApp'], ['email', 'Email'], ['razorpay', 'Razorpay'], ['googleSheets', 'Google Sheets']];
+    $('.demo-card').innerHTML = DEMO
+      ? '<b>Demo mode</b><p>Sample data, saved in this browser only. Nothing is charged or sent.</p><button class="link-btn" data-action="reset">Reset demo data</button>'
+      : `<b>Connections</b><p>${names.map(([k, l]) => `${I[k] ? '●' : '○'} ${l}${I[k] ? '' : ' · off'}`).join('<br>')}</p><button class="link-btn" data-action="sign-out">Sign out</button>`;
+    $('.sync').innerHTML = DEMO || I.googleCalendar ? '<span class="dot"></span>Google Calendar synced' : '<span class="dot" style="background:var(--muted);box-shadow:none"></span>Google Calendar not connected';
+  }
   function route() { const h = location.hash.slice(1); current = VIEWS[h] ? h : 'overview'; render(); window.scrollTo(0, 0); }
 
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', async (e) => {
     const el = e.target.closest('[data-action]'); if (!el) return;
     const a = el.dataset.action, id = el.dataset.id;
     if (['INPUT', 'SELECT', 'TEXTAREA'].includes(el.tagName)) return;
@@ -619,11 +667,13 @@
     switch (a) {
       case 'close': closeModal(); break;
       case 'close-drawer': closeDrawer(); break;
-      case 'reset': if (confirm('Reset all demo data to the original sample?')) { S.reset(); closeDrawer(); toast('Demo data reset'); } break;
+      case 'reset': if (DEMO && confirm('Reset all demo data to the original sample?')) { S.reset(); closeDrawer(); toast('Demo data reset'); } break;
+      case 'sign-out': S.signOut(); location.reload(); break;
+      case 'void': if (confirm('Void this unpaid bill? It will disappear from billing.')) { try { await S.voidInvoice(id); toast('Bill voided'); } catch (err) { fail(err); } } break;
       case 'new-appt': newAppointment(id); break;
       case 'new-bill': billEditor({ patientId: id }); break;
       case 'bill-appt': billEditor({ appointmentId: id }); break;
-      case 'done': S.setStatus(id, 'completed'); billEditor({ appointmentId: id }); break;
+      case 'done': try { await S.setStatus(id, 'completed'); billEditor({ appointmentId: id }); } catch (err) { fail(err); } break;
       case 'collect': payment(id); break;
       case 'receipt': receipt(id); break;
       case 'patient': openDrawer(id); break;
@@ -643,22 +693,24 @@
       case 'print': $('#print').innerHTML = receiptHTML(S.invoice(id)); window.print(); break;
       case 'send-receipt': {
         const inv = S.invoice(id), p = S.patient(inv.patientId), ch = el.dataset.ch;
-        S.sendReceipt(id, ch); receipt(id);
-        toast(`Receipt ${inv.no} sent ${ch === 'email' ? 'by email to ' + esc(p.email) : 'on WhatsApp to ' + esc(p.phone)} <i>(demo: logged, not actually sent)</i>`);
+        el.disabled = true;
+        try { const r = await S.sendReceipt(id, ch); receipt(id); toast(`Receipt ${inv.no}: ${delivery(r, ch, ch === 'email' ? esc(p.email) : esc(p.phone))}`, 5000); } catch (err) { el.disabled = false; fail(err); }
         break;
       }
       case 'send-reminders': {
-        const rem = S.reminders(); rem.forEach((r) => S.log({ patientId: r.patient.id, channel: 'whatsapp', kind: 'reminder', body: r.body }, false)); S.save();
-        toast(`${rem.length} reminders sent <i>(demo: logged, not actually sent)</i>`); break;
+        try { const n = await S.sendRemindersNow(); toast(`${n} reminder${n === 1 ? '' : 's'} ${DEMO ? 'sent' + demoNote('logged, not actually sent') : S.integrations.whatsapp ? 'sent. Delivery status shows in the Outbox.' : 'recorded, but not delivered: WhatsApp isn\'t connected yet'}`); } catch (err) { fail(err); }
+        break;
       }
     }
   });
-  document.addEventListener('change', (e) => {
+  document.addEventListener('change', async (e) => {
     const el = e.target, a = el.dataset.action;
-    if (a === 'status') { S.setStatus(el.dataset.id, el.value); toast(`Marked ${statusLabel(el.value).toLowerCase()}${el.value === 'cancelled' ? ' · removed from Google Calendar (demo)' : ''}`); }
-    if (a === 'setting') { S.state.settings[el.dataset.k] = el.checked; S.save(); }
-    if (a === 'optin') { S.patient(el.dataset.id).optIn = el.checked; S.save(); }
-    if (a === 'notes') { S.patient(el.dataset.id).notes = el.value; S.save(); toast('Notes saved'); }
+    try {
+      if (a === 'status') { await S.setStatus(el.dataset.id, el.value); toast(`Marked ${statusLabel(el.value).toLowerCase()}${el.value === 'cancelled' && (DEMO || S.integrations.googleCalendar) ? ' · removed from Google Calendar' + demoNote('simulated') : ''}`); }
+      if (a === 'setting') await S.updateSettings({ [el.dataset.k]: el.checked });
+      if (a === 'optin') await S.updatePatient(el.dataset.id, { optIn: el.checked });
+      if (a === 'notes') { await S.updatePatient(el.dataset.id, { notes: el.value }); toast('Notes saved'); }
+    } catch (err) { fail(err); }
     if (el.id === 'patTag') { ui.patTag = el.value; $('#list').innerHTML = VIEWS.patients.list(); }
   });
   document.addEventListener('input', (e) => {
@@ -669,6 +721,20 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (!$('#modal').hidden) closeModal(); else if (!$('#drawer').hidden) closeDrawer(); } });
   let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => current === 'overview' && drawRevenue(), 150); });
   window.addEventListener('hashchange', route);
-  S.subscribe(render);
-  route();
+  function start() {
+    cfg = S.cfg; money = S.money;
+    $('#login').hidden = true; $('.app').hidden = false;
+    S.subscribe(() => { if (S.state) render(); });
+    route();
+  }
+  async function boot() {
+    if (DEMO) return start();
+    if (await S.resume()) return start();
+    $('.app').hidden = true; $('#login').hidden = false; $('#loginToken').focus();
+    $('#loginForm').onsubmit = async (e) => {
+      e.preventDefault(); $('#loginErr').textContent = '';
+      try { await S.signIn($('#loginToken').value); start(); } catch (err) { $('#loginErr').textContent = err.status === 401 ? 'That access key is wrong.' : err.message; }
+    };
+  }
+  boot();
 })();
