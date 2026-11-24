@@ -1,0 +1,1430 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aurelia Dental · Sushant Lok, Gurugram">
+<meta property="og:description" content="Implants, aligners, single-visit root canals and smile makeovers in Sushant Lok, Gurugram. Transparent pricing and instant online booking.">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://dhruvheda.github.io/aurelia-dental/">
+<meta property="og:image" content="https://dhruvheda.github.io/aurelia-dental/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='9' fill='%23111214'/><path d='M10 9c2-1.5 4-1 6 0 2-1 4-1.5 6 0 2 2 1.5 6 .5 8.5-.8 2.2-1 6-2.5 6.5-1.6.6-1.8-4-4-4s-2.4 4.6-4 4c-1.5-.5-1.7-4.3-2.5-6.5C8.5 15 8 11 10 9z' fill='%23d4f45a'/></svg>" />
+<title>Aurelia Dental</title>
+<meta name="description" content="Implants, aligners, single-visit root canals and smile makeovers in Sushant Lok, Gurugram. Transparent pricing and instant online booking.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+/* Aurelia Dental: light "studio" theme (heavy black type, chrome + lime accents) */
+:root {
+  --page: #e6e6e3;
+  --sheet: #f1f1ef;
+  --card: #ffffff;
+  --ink: #0f1012;
+  --ink-2: #33363b;
+  --muted: #7a7e85;
+  --line: rgba(15, 16, 18, 0.08);
+  --line-2: rgba(15, 16, 18, 0.15);
+  --lime: #d4f45a;
+  --lime-2: #c2e83a;
+  --lime-ink: #4f6b00;
+  --danger: #d9344a;
+  --radius: 26px;
+  --radius-sm: 16px;
+  --shadow: 0 30px 60px -30px rgba(15, 16, 18, 0.25);
+  --font: 'Inter', system-ui, sans-serif;
+  --display: 'Montserrat', 'Inter', sans-serif;
+  /* legacy aliases used by admin */
+  --text: var(--ink); --surface: rgba(15,16,18,.035); --surface-2: rgba(15,16,18,.06);
+  --mint: var(--lime-ink); --blue: #2f6fdb;
+}
+
+[hidden] { display: none !important; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; overflow-x: clip; }
+body { background: var(--page); color: var(--ink); font: 400 16px/1.6 var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+img, svg { display: block; }
+input, textarea, select { font: inherit; color: inherit; }
+::selection { background: var(--lime); color: var(--ink); }
+
+.container { width: min(1240px, 100% - 32px); margin-inline: auto; }
+.section { position: relative; padding: 110px 0; }
+.section-tight { padding: 50px 0; }
+.muted { color: var(--muted); }
+.small { font-size: 14px; }
+.tiny { font-size: 12px; color: var(--muted); margin-top: 12px; }
+.mt { margin-top: 28px; }
+.mt-s { margin-top: 10px; }
+.w-full { width: 100%; }
+
+h1, h2, h3, h4, h5 { font-family: var(--display); letter-spacing: -0.035em; line-height: 1.02; font-weight: 800; }
+h2 { font-size: clamp(34px, 4.8vw, 64px); }
+.h2-sm { font-size: clamp(30px, 3.6vw, 46px); }
+h3 { font-size: 20px; letter-spacing: -0.02em; line-height: 1.2; font-weight: 700; }
+h4 { font-weight: 700; }
+/* Highlighted word: lime marker stroke */
+em { font-style: normal; background: linear-gradient(transparent 58%, var(--lime) 58%, var(--lime) 92%, transparent 92%); padding: 0 .08em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; color: var(--ink-2); margin-bottom: 20px; }
+.eyebrow::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 4px rgba(212,244,90,.35); }
+
+.glass { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+.bg-grid { display: none; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 46px; padding: 0 22px; border-radius: 999px; font-weight: 500; font-size: 15px; white-space: nowrap; transition: transform .2s, background .2s, box-shadow .2s, opacity .2s; }
+.btn-lg { height: 54px; padding: 0 28px; font-size: 16px; }
+.btn-primary { background: var(--ink); color: #fff; }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 30px -12px rgba(15,16,18,.6); }
+.btn-primary:disabled { opacity: .25; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-ghost { background: transparent; border: 1px solid var(--line-2); }
+.btn-ghost:hover { background: var(--card); border-color: var(--ink); }
+.btn-light { background: var(--lime); color: var(--ink); font-weight: 600; }
+.btn-light:hover { transform: translateY(-1px); background: var(--lime-2); }
+.arr { transition: transform .2s; }
+.btn:hover .arr { transform: translateX(3px); }
+.link { text-decoration: underline; text-decoration-color: var(--lime-2); text-decoration-thickness: 3px; text-underline-offset: 4px; margin-top: 18px; font-weight: 500; }
+
+/* Nav */
+.nav-wrap { position: fixed; top: 12px; left: 0; right: 0; z-index: 50; }
+.nav { width: min(1240px, 100% - 32px); margin: 0 auto; height: 62px; display: flex; align-items: center; justify-content: space-between; padding: 0 8px 0 22px; border-radius: 999px; background: rgba(255,255,255,.72); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--line); box-shadow: 0 10px 30px -18px rgba(15,16,18,.3); }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: -0.03em; }
+.brand-mark { width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #c9d1dc 45%, #7d8a9c); position: relative; overflow: hidden; flex: none; }
+.brand-mark::after { content: ''; position: absolute; inset: 8px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #effe9f, var(--lime-2) 60%, #8fb300); }
+.nav-links { display: flex; gap: 2px; list-style: none; }
+.nav-links a { padding: 8px 14px; border-radius: 999px; font-size: 15px; color: var(--ink-2); transition: background .2s; }
+.nav-links a:hover { background: rgba(15,16,18,.06); }
+.nav-cta { display: flex; gap: 8px; }
+.nav-burger { display: none; width: 44px; height: 44px; border-radius: 50%; background: rgba(15,16,18,.06); flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
+.nav-burger span { width: 16px; height: 1.5px; background: var(--ink); transition: transform .25s; }
+.nav.open .nav-burger span:first-child { transform: translateY(3.25px) rotate(45deg); }
+.nav.open .nav-burger span:last-child { transform: translateY(-3.25px) rotate(-45deg); }
+
+/* Hero (Sapforce-style sheet) */
+.hero { padding: 90px 0 30px; }
+.hero-sheet { position: relative; border-radius: 30px; overflow: hidden; height: clamp(660px, 88vh, 840px);
+  background:
+    radial-gradient(60% 50% at 85% 95%, rgba(212,244,90,.28), transparent 70%),
+    radial-gradient(40% 40% at 10% 60%, rgba(255,255,255,.9), transparent 70%),
+    var(--sheet); }
+.hero-sheet::before { content: ''; position: absolute; inset: -20%; pointer-events: none; opacity: .5;
+  background: repeating-radial-gradient(ellipse 120% 80% at 30% 120%, transparent 0 34px, rgba(15,16,18,.035) 34px 35px);
+  filter: blur(.6px); animation: drift 30s ease-in-out infinite alternate; }
+@keyframes drift { to { transform: translate(4%, -3%) rotate(3deg); } }
+.hero-top { position: relative; background: var(--card); border-radius: 0 0 30px 30px; height: 36%; display: flex; align-items: flex-end; justify-content: center; padding: 0 3% 2.4%; z-index: 1; }
+.wordmark { font-family: var(--display); font-weight: 900; font-size: clamp(64px, 19vw, 250px); letter-spacing: -0.055em; line-height: .78; color: var(--ink); white-space: nowrap;
+  background: linear-gradient(180deg, #0f1012 55%, #3b3f46); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.wordmark span { -webkit-text-fill-color: var(--ink); }
+.hero-3d { position: absolute; z-index: 2; left: 50%; top: 9%; width: min(66%, 760px); height: 92%; transform: translateX(-50%); pointer-events: none; }
+.hero-3d canvas { width: 100% !important; height: 100% !important; display: block; animation: fadeIn 1.2s ease both; }
+@keyframes fadeIn { from { opacity: 0; transform: scale(.92); } }
+.hero-3d-fallback { position: absolute; left: 50%; top: 52%; width: 56%; max-width: 420px; aspect-ratio: 1; transform: translate(-50%, -50%);
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><path d='M62 40c16-12 30-9 38-2 8-7 22-10 38 2 18 14 13 44 5 62-6 14-7 52-20 56-11 3-12-34-23-34s-12 37-23 34c-13-4-14-42-20-56-8-18-13-48 5-62z' fill='%23f3f5f8' stroke='%23c9d1dc' stroke-width='2'/><path d='M30 120c10 40 120 50 145-10' fill='none' stroke='%23b4e41f' stroke-width='9' stroke-linecap='round'/><path d='M168 96l20 4-14 16z' fill='%23b4e41f'/></svg>") center / contain no-repeat; animation: float 6s ease-in-out infinite; }
+.hero-3d.ready .hero-3d-fallback { display: none; }
+@keyframes float { 50% { transform: translate(-50%, calc(-50% - 12px)); } }
+
+.hero-meta-l { position: absolute; z-index: 3; left: 4.5%; top: 43%; }
+.avatar-row { display: flex; align-items: center; gap: 12px; }
+.avatar-row b { font-family: var(--display); font-weight: 600; font-size: 26px; letter-spacing: -0.03em; }
+.hero-meta-l small { display: block; font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+.avatars { display: flex; }
+.avatars span { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 600; color: #fff; border: 2px solid var(--sheet); margin-left: -9px; background: linear-gradient(135deg, #3a4150, #6b7486); }
+.avatars span:first-child { margin-left: 0; background: linear-gradient(135deg, #1f2a3a, #4b5a72); }
+.avatars span:nth-child(3) { background: linear-gradient(135deg, #7d8d2a, #b6d23c); }
+.hero-meta-r { position: absolute; z-index: 3; right: 4.5%; top: 43%; list-style: none; text-align: right; font-size: 13px; color: var(--muted); display: grid; gap: 6px; }
+.hero-meta-r span { color: var(--ink-2); margin-left: 6px; }
+.slot-chip { position: absolute; z-index: 3; right: 4.5%; top: 58%; display: flex; align-items: center; gap: 10px; padding: 10px 16px 10px 12px; border-radius: 999px; background: rgba(255,255,255,.8); backdrop-filter: blur(10px); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.slot-chip small { display: block; font-size: 11px; color: var(--muted); line-height: 1.2; }
+.slot-chip b { font-size: 14px; font-weight: 600; }
+.pulse { width: 10px; height: 10px; border-radius: 50%; background: #39c26a; animation: pulse 2s infinite; flex: none; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(57,194,106,.5); } 70%, 100% { box-shadow: 0 0 0 9px rgba(57,194,106,0); } }
+.hero-copy { position: absolute; z-index: 3; left: 4.5%; bottom: 6%; max-width: 430px; }
+.hero-tag { font-size: 19px; line-height: 1.35; color: var(--ink); letter-spacing: -0.01em; padding-bottom: 14px; margin-bottom: 22px;
+  background: radial-gradient(circle, var(--ink) 1px, transparent 1.4px) bottom left / 8px 3px repeat-x; }
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.orb-btn { position: absolute; z-index: 3; right: 4.5%; bottom: 6%; width: 150px; height: 150px; border-radius: 50%; background: var(--lime); display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 500; font-size: 15px; transition: transform .35s cubic-bezier(.2,1.4,.4,1), background .2s; }
+.orb-btn:hover { transform: scale(1.08) rotate(-4deg); background: var(--lime-2); }
+.orb-btn span { font-size: 12px; }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 16px; gap: 16px; }
+.stat { padding: 24px 26px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; }
+.stat b { display: block; font-family: var(--display); font-weight: 800; font-size: 42px; letter-spacing: -0.05em; line-height: 1; }
+.stat span { color: var(--muted); font-size: 13px; text-align: right; max-width: 110px; line-height: 1.3; }
+.stat:first-child { background: var(--ink); color: #fff; border-color: var(--ink); }
+.stat:first-child b { color: var(--lime); }
+
+/* Marquee */
+.marquee { padding: 26px 0; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.marquee-track { display: flex; gap: 48px; width: max-content; animation: marquee 40s linear infinite; }
+.marquee-track span { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: -0.03em; color: var(--ink-2); white-space: nowrap; display: flex; align-items: center; gap: 48px; }
+.marquee-track span::after { content: ''; width: 12px; height: 12px; border-radius: 50%; background: var(--lime-2); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Section heads */
+.section-head { margin-bottom: 52px; max-width: 780px; }
+.section-head.center { text-align: center; margin-inline: auto; }
+.section-head p { margin-top: 18px; font-size: 17px; }
+.section-head.row { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; max-width: none; flex-wrap: wrap; }
+
+/* Bento */
+.bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.b-card { padding: 30px; position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s; }
+.b-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.b-card h3 { margin-bottom: 10px; }
+.b-card p { color: var(--muted); font-size: 15px; }
+.b-wide { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: center; }
+.b-tall { grid-row: span 2; background: var(--ink); color: #fff; border-color: var(--ink); }
+.b-tall p { color: #a7abb2; }
+.b-icon { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 26px; background: var(--lime); color: var(--ink); }
+.b-icon svg { width: 22px; height: 22px; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; height: 170px; }
+.cmp { border-radius: 18px; position: relative; display: flex; align-items: flex-end; padding: 12px; font-size: 12px; overflow: hidden; }
+.cmp::before { content: ''; position: absolute; left: 14%; right: 14%; top: 36%; height: 30%; border-radius: 40px 40px 60px 60px;
+  background: repeating-linear-gradient(90deg, var(--c) 0 16%, rgba(0,0,0,.25) 16% 17.5%); }
+.before { --c: #d6c79c; background: linear-gradient(180deg, #e9dfdc, #d9cdca); }
+.before::before { transform: rotate(-3deg) skewX(4deg); }
+.after { --c: #ffffff; background: linear-gradient(160deg, var(--lime), #b9e033); }
+.cmp span { position: relative; padding: 3px 10px; border-radius: 999px; background: rgba(255,255,255,.85); font-weight: 500; }
+.checklist { list-style: none; margin-top: 26px; display: grid; gap: 10px; }
+.checklist li { display: flex; gap: 12px; align-items: center; font-size: 15px; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
+.checklist li::before { content: '✓'; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; background: var(--lime); color: var(--ink); flex: none; font-weight: 700; }
+.mini-cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.mini-cal div { aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; font-size: 12px; background: var(--sheet); color: var(--muted); }
+.mini-cal div.on { background: var(--card); border: 1px solid var(--line-2); color: var(--ink); }
+.mini-cal div.pick { background: var(--ink); color: var(--lime); font-weight: 700; }
+
+/* Concern guide */
+.guide { padding: 44px; display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; align-items: start; background: var(--sheet); }
+.guide p { margin-top: 14px; }
+.concerns { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--card); font-size: 14px; transition: all .2s; }
+.chip:hover { border-color: var(--ink); }
+.chip.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.concern-result { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; }
+.concern-result:empty { display: none; }
+.cr-card { flex: 1 1 260px; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 20px; border-radius: var(--radius-sm); background: var(--card); border: 1px solid var(--line); animation: rise .35s ease both; }
+.cr-card small { display: block; color: var(--muted); }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+
+/* Tabs + treatments */
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; padding: 5px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); }
+.tab { padding: 8px 16px; border-radius: 999px; font-size: 14px; color: var(--muted); transition: all .2s; }
+.tab:hover { color: var(--ink); }
+.tab.active { background: var(--ink); color: #fff; }
+.t-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px; counter-reset: t; }
+.t-card { padding: 26px; display: flex; flex-direction: column; gap: 14px; min-height: 280px; transition: transform .3s, box-shadow .3s; animation: rise .4s ease both; counter-increment: t; }
+.t-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.t-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.t-top::after { content: '/' counter(t, decimal-leading-zero); font-size: 13px; color: var(--muted); }
+.t-top:has(.badge)::after { display: none; }
+.t-icon { width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; background: var(--sheet); color: var(--ink); transition: background .3s; }
+.t-card:hover .t-icon { background: var(--lime); }
+.t-icon svg { width: 22px; height: 22px; }
+.badge { font-size: 11px; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: var(--lime); color: var(--ink); }
+.t-card p { color: var(--muted); font-size: 14.5px; flex: 1; }
+.t-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px dashed var(--line-2); }
+.t-price small { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.t-price b { font-family: var(--display); font-size: 20px; font-weight: 800; letter-spacing: -0.03em; }
+.t-book { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--sheet); transition: all .2s; }
+.t-card:hover .t-book { background: var(--ink); color: var(--lime); }
+
+/* Pricing */
+.pricing-wrap { display: grid; grid-template-columns: 1fr 350px; gap: 16px; align-items: start; }
+.price-table { padding: 10px; }
+.pt-head, .pt-row { display: grid; grid-template-columns: 1fr 220px 110px; align-items: center; gap: 12px; padding: 14px 18px; }
+.pt-head { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.pt-group { padding: 20px 18px 6px; font-family: var(--display); font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.pt-group::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--lime-2); }
+.pt-row { border-radius: 14px; transition: background .2s; }
+.pt-row:hover { background: var(--sheet); }
+.pt-row .n { font-weight: 500; }
+.pt-row .n small { display: block; color: var(--muted); font-weight: 400; font-size: 13px; }
+.pt-row .p { font-family: var(--display); font-weight: 700; letter-spacing: -0.02em; }
+.pt-row .p small { font-family: var(--font); font-weight: 400; color: var(--muted); font-size: 12px; letter-spacing: 0; }
+.add-btn { justify-self: end; height: 34px; padding: 0 14px; border-radius: 999px; font-size: 13px; border: 1px solid var(--line-2); background: var(--card); transition: all .2s; }
+.add-btn:hover { border-color: var(--ink); }
+.add-btn.added { background: var(--lime); border-color: var(--lime); font-weight: 600; }
+.estimator { padding: 30px; position: sticky; top: 96px; background: var(--ink); color: #fff; border-color: var(--ink); }
+.estimator .eyebrow { color: #c4c7cc; }
+.estimator .muted, .estimator .tiny { color: #9599a0; }
+.est-total { font-family: var(--display); font-size: 40px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; color: var(--lime); }
+.est-list { list-style: none; margin: 18px 0; display: grid; gap: 8px; }
+.est-list li { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,.07); }
+.est-list li span:last-child { color: #9599a0; white-space: nowrap; }
+.est-list button { color: #9599a0; margin-left: 6px; }
+.est-emi { font-size: 14px; color: var(--lime); margin-bottom: 16px; }
+.est-emi:empty { display: none; }
+.estimator .btn-primary { background: var(--lime); color: var(--ink); font-weight: 600; }
+
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.step { padding: 28px; border-radius: var(--radius); background: var(--sheet); transition: background .3s; }
+.step:hover { background: var(--lime); }
+.step b { font-family: var(--display); font-size: 13px; color: var(--muted); }
+.step b::before { content: '/'; }
+.step:hover b { color: var(--ink); }
+.step h4 { font-size: 20px; margin: 30px 0 8px; letter-spacing: -0.03em; }
+.step p { color: var(--ink-2); font-size: 15px; }
+
+/* Team */
+.team { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.doc { border-radius: var(--radius); overflow: hidden; background: var(--card); border: 1px solid var(--line); transition: transform .3s, box-shadow .3s; }
+.doc:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.doc-ph { aspect-ratio: 4 / 4.2; position: relative; display: grid; place-items: center; margin: 8px; border-radius: 20px;
+  background: radial-gradient(circle at 50% 120%, var(--c1), transparent 65%), linear-gradient(180deg, #f6f6f4, #e4e5e2); }
+.doc-ph span { font-family: var(--display); font-size: 72px; font-weight: 900; letter-spacing: -0.06em; color: var(--ink); }
+.doc-ph i { position: absolute; top: 12px; right: 12px; font-style: normal; font-size: 12px; padding: 5px 11px; border-radius: 999px; background: var(--card); font-weight: 500; }
+.doc-info { padding: 12px 20px 22px; }
+.doc-info h4 { font-size: 18px; letter-spacing: -0.03em; }
+.doc-info p { color: var(--ink-2); font-size: 14px; margin-top: 4px; font-weight: 500; }
+.doc-info small { color: var(--muted); font-size: 13px; }
+
+/* Quotes */
+.quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.quote { padding: 30px; display: flex; flex-direction: column; gap: 20px; }
+.quote:nth-child(2) { background: var(--lime); border-color: var(--lime); }
+.quote p { font-size: 18px; line-height: 1.5; flex: 1; letter-spacing: -0.01em; }
+.quote p::before { content: '“'; display: block; font-family: var(--display); font-weight: 900; font-size: 64px; line-height: .7; margin-bottom: 6px; }
+.quote footer { display: flex; justify-content: space-between; align-items: center; font-size: 14px; padding-top: 16px; border-top: 1px dashed var(--line-2); }
+.quote footer span { color: var(--ink-2); opacity: .7; }
+
+/* Booking */
+#book { overflow: hidden; }
+.orb { display: none; }
+.book-shell { display: grid; grid-template-columns: 330px 1fr; overflow: hidden; box-shadow: var(--shadow); }
+.book-side { padding: 40px 32px; background: var(--ink); color: #fff; display: flex; flex-direction: column; min-width: 0; }
+.book-side .eyebrow { color: #c4c7cc; }
+.book-side em { background: none; color: var(--lime); padding: 0; }
+.book-steps { list-style: none; margin: 32px 0; display: grid; gap: 6px; }
+.book-steps li { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; color: #8b8f96; font-size: 15px; transition: all .2s; }
+.book-steps li span { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; border: 1px solid rgba(255,255,255,.2); flex: none; }
+.book-steps li.active { background: rgba(255,255,255,.08); color: #fff; }
+.book-steps li.active span { background: var(--lime); color: var(--ink); border: 0; font-weight: 700; }
+.book-steps li.done span { background: rgba(212,244,90,.2); color: var(--lime); border-color: transparent; }
+.book-contact { margin-top: auto; display: grid; gap: 8px; }
+.book-contact .muted { color: #8b8f96; }
+.book-side .btn-ghost { border-color: rgba(255,255,255,.2); color: #fff; }
+.book-side .btn-ghost:hover { background: rgba(255,255,255,.08); border-color: #fff; }
+.book-main { padding: 40px; min-height: 580px; min-width: 0; }
+.b-step { display: none; animation: rise .35s ease both; }
+.b-step.active { display: block; }
+.b-step h3 { margin-bottom: 18px; font-size: 22px; }
+.treat-pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; max-height: 410px; overflow: auto; padding: 2px 4px 2px 2px; }
+.tp { text-align: left; padding: 14px 16px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: var(--sheet); transition: all .2s; }
+.tp:hover { border-color: var(--line-2); background: var(--card); }
+.tp.sel { border-color: var(--ink); background: var(--lime); }
+.tp b { display: block; font-weight: 600; font-size: 14.5px; }
+.tp small { color: var(--muted); font-size: 12.5px; }
+.tp.sel small { color: var(--ink-2); }
+.days { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: thin; }
+.day { flex: none; width: 76px; padding: 12px 6px; border-radius: 18px; border: 1px solid var(--line); background: var(--sheet); text-align: center; transition: all .2s; }
+.day small { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.day b { display: block; font-family: var(--display); font-weight: 800; font-size: 24px; margin: 2px 0; }
+.day i { font-style: normal; font-size: 11px; color: var(--lime-ink); font-weight: 500; }
+.day:disabled { opacity: .35; cursor: not-allowed; }
+.day:disabled i { color: var(--muted); }
+.day.sel { background: var(--ink); color: #fff; border-color: var(--ink); }
+.day.sel small { color: #9599a0; }
+.day.sel i { color: var(--lime); }
+.times { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+.time { height: 46px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--card); font-size: 14px; transition: all .2s; }
+.time:hover { border-color: var(--ink); }
+.time.sel { background: var(--lime); border-color: var(--lime); font-weight: 600; }
+.b-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding-top: 22px; border-top: 1px dashed var(--line-2); }
+.summary { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.summary span { padding: 7px 14px; border-radius: 999px; background: var(--sheet); font-size: 14px; }
+.summary span:first-child { background: var(--lime); font-weight: 500; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field { display: block; margin-bottom: 14px; }
+.field > span { display: block; font-size: 14px; font-weight: 500; margin-bottom: 7px; }
+.field small { color: var(--muted); font-weight: 400; }
+.field input, .field textarea, .callback input { width: 100%; padding: 13px 16px; border-radius: 14px; border: 1px solid var(--line-2); background: var(--sheet); outline: none; transition: border-color .2s, box-shadow .2s, background .2s; resize: vertical; }
+.field input:focus, .field textarea:focus, .callback input:focus { border-color: var(--ink); background: var(--card); box-shadow: 0 0 0 4px rgba(212,244,90,.5); }
+.field em { display: block; font-style: normal; font-size: 13px; color: var(--danger); background: none; margin-top: 5px; padding: 0; }
+.field em:empty { display: none; }
+.field.err input { border-color: var(--danger); }
+.form-error { color: var(--danger); font-size: 14px; }
+.form-error:empty { display: none; }
+.done-box { text-align: center; padding: 40px 0; display: flex; flex-direction: column; align-items: center; }
+.done-badge { width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; font-size: 36px; background: var(--lime); color: var(--ink); box-shadow: 0 0 0 12px rgba(212,244,90,.3); margin-bottom: 26px; animation: pop .5s cubic-bezier(.2,1.6,.4,1) both; }
+@keyframes pop { from { transform: scale(.4); opacity: 0; } }
+.done-box h3 { font-size: 32px; font-weight: 800; letter-spacing: -0.04em; }
+.done-box p { max-width: 420px; margin: 10px 0 20px; }
+.ref { font-family: ui-monospace, monospace; padding: 8px 16px; border-radius: 12px; background: var(--sheet); border: 1px dashed var(--line-2); margin-bottom: 24px; }
+.done-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+/* FAQ */
+.faq-wrap { display: grid; grid-template-columns: 1fr 1.3fr; gap: 60px; align-items: start; }
+.faq-wrap > div:first-child p { margin-top: 18px; }
+.callback { padding: 18px; margin-top: 28px; display: grid; gap: 10px; }
+.callback p:empty { display: none; }
+.faqs { display: grid; gap: 10px; }
+.faq { border-radius: 20px; background: var(--card); border: 1px solid var(--line); overflow: hidden; transition: box-shadow .2s; }
+.faq.open { box-shadow: var(--shadow); }
+.faq button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 22px; text-align: left; font-weight: 600; font-size: 16.5px; letter-spacing: -0.01em; }
+.faq button i { font-style: normal; width: 32px; height: 32px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--sheet); transition: transform .3s, background .3s; font-size: 18px; }
+.faq.open button i { transform: rotate(45deg); background: var(--lime); }
+.faq div { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+.faq.open div { grid-template-rows: 1fr; }
+.faq p { overflow: hidden; color: var(--ink-2); padding: 0 22px; }
+.faq.open p { padding-bottom: 22px; }
+
+/* CTA */
+.cta { position: relative; overflow: hidden; text-align: center; padding: 90px 30px; border-radius: 32px; background: var(--lime); }
+.cta::before { content: ''; position: absolute; inset: -30%; pointer-events: none; opacity: .5;
+  background: repeating-radial-gradient(circle at 50% 120%, transparent 0 30px, rgba(15,16,18,.06) 30px 31px); }
+.cta > * { position: relative; }
+.cta h2 { font-size: clamp(36px, 5.6vw, 76px); }
+.cta h2 em { background: none; text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: 8px; }
+.cta p { margin: 18px auto 34px; max-width: 520px; color: var(--ink-2); font-size: 17px; }
+.cta .btn-light { background: var(--ink); color: #fff; }
+.cta .btn-light:hover { background: #26282c; }
+
+/* Footer */
+.footer { padding: 70px 0 30px; margin-top: 50px; background: var(--ink); color: #fff; border-radius: 32px 32px 0 0; overflow: hidden; }
+.footer .muted { color: #9599a0; }
+.foot-grid { display: grid; grid-template-columns: 1.2fr .8fr 1.3fr; gap: 40px; }
+.foot-grid h5 { font-size: 15px; margin-bottom: 16px; }
+.foot-grid a:hover { color: var(--lime); }
+.hours { list-style: none; display: grid; gap: 8px; font-size: 14px; }
+.hours li { display: flex; justify-content: space-between; gap: 10px; color: #9599a0; }
+.hours li.today { color: var(--lime); font-weight: 500; }
+.map { overflow: hidden; min-height: 220px; padding: 0; border-color: rgba(255,255,255,.1); }
+.map iframe { width: 100%; height: 100%; min-height: 220px; border: 0; filter: grayscale(1) contrast(1.05); }
+.foot-bottom { display: flex; justify-content: space-between; margin-top: 50px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); color: #9599a0; }
+.footer-word { font-family: var(--display); font-weight: 900; font-size: clamp(60px, 17vw, 230px); letter-spacing: -0.06em; line-height: .8; color: #1c1e21; text-align: center; margin-top: 50px; user-select: none; white-space: nowrap; }
+.footer-word span { color: var(--lime); }
+
+.wa-fab { position: fixed; right: 20px; bottom: 20px; z-index: 40; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: #25d366; color: #fff; box-shadow: 0 12px 30px -6px rgba(37,211,102,.6); transition: transform .2s; }
+.wa-fab:hover { transform: scale(1.06); }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* Responsive */
+@media (max-width: 1060px) {
+  .bento { grid-template-columns: 1fr 1fr; }
+  .b-tall { grid-row: auto; }
+  .pricing-wrap { grid-template-columns: 1fr; }
+  .estimator { position: static; }
+  .team { grid-template-columns: repeat(2, 1fr); }
+  .steps, .stats { grid-template-columns: repeat(2, 1fr); }
+  .faq-wrap, .guide { grid-template-columns: 1fr; gap: 30px; }
+  .hero-meta-r { display: none; }
+  .hero-3d { width: 78%; }
+}
+@media (max-width: 860px) {
+  .nav-links { display: none; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; padding: 12px; border-radius: 24px; background: rgba(255,255,255,.97); border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .nav.open .nav-links { display: flex; }
+  .nav-links a { display: block; padding: 12px 16px; }
+  .nav-burger { display: flex; }
+  .hide-sm { display: none; }
+  .nav-cta { margin-left: auto; margin-right: 8px; }
+  .book-shell { grid-template-columns: 1fr; }
+  .book-steps { grid-template-columns: repeat(3, 1fr); margin: 20px 0 0; }
+  .book-steps li { flex-direction: column; gap: 6px; font-size: 12px; text-align: center; padding: 8px 4px; }
+  .book-contact { display: none; }
+  .quotes { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; }
+
+  /* Hero becomes a vertical flow */
+  .hero-sheet { height: auto; display: flex; flex-direction: column; padding-bottom: 26px; }
+  .hero-top { height: auto; padding: 26px 4% 18px; }
+  .wordmark { font-size: 16.5vw; }
+  .hero-3d { position: relative; left: auto; top: auto; transform: none; width: 100%; height: 360px; margin: -40px 0 -10px; }
+  .hero-meta-l, .slot-chip, .hero-copy { position: relative; left: auto; right: auto; top: auto; bottom: auto; }
+  .hero-meta-l { padding: 0 22px; display: flex; align-items: center; gap: 14px; }
+  .hero-meta-l small { margin: 0; }
+  .slot-chip { margin: 16px 22px 0; align-self: flex-start; }
+  .hero-copy { padding: 22px 22px 0; max-width: none; }
+  .orb-btn { display: none; }
+}
+@media (max-width: 640px) {
+  .section { padding: 76px 0; }
+  .hero { padding-top: 84px; }
+  .hero-3d { height: 300px; }
+  .hero-tag { font-size: 17px; }
+  .bento { grid-template-columns: 1fr; }
+  .b-wide { grid-column: auto; grid-template-columns: 1fr; }
+  .team { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .doc-ph span { font-size: 46px; }
+  .doc-info { padding: 10px 14px 16px; }
+  .doc-info h4 { font-size: 15px; }
+  .steps { grid-template-columns: 1fr; }
+  .stats { gap: 10px; }
+  .stat { padding: 18px; flex-direction: column; align-items: flex-start; }
+  .stat b { font-size: 32px; }
+  .stat span { text-align: left; }
+  .guide { padding: 26px; }
+  .pt-head { display: none; }
+  .pt-row { grid-template-columns: 1fr auto; }
+  .pt-row .p { grid-column: 1; grid-row: 2; }
+  .pt-row .add-btn { grid-row: 1 / span 2; grid-column: 2; }
+  .book-main, .book-side { padding: 26px 20px; }
+  .field-row { grid-template-columns: 1fr; gap: 0; }
+  .cta { padding: 60px 20px; }
+  .foot-bottom { flex-direction: column; gap: 8px; }
+  .btn-lg { height: 50px; padding: 0 22px; }
+  .nav { padding-left: 16px; }
+  .brand { font-size: 16px; }
+  .nav-cta .btn { height: 38px; padding: 0 14px; font-size: 14px; }
+  .nav-burger { width: 38px; height: 38px; flex: none; }
+  .nav-cta { margin-right: 6px; }
+}
+
+
+.reveal { opacity: 1; transform: none; }
+.map-link { display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; padding: 24px; color: #fff;
+  background: repeating-linear-gradient(45deg, #1a1c1f 0 14px, #1e2023 14px 28px); }
+.map-link span { color: #9599a0; font-size: 14px; }
+.map-link b { color: var(--lime); font-size: 18px; }
+.demo-pill { position: fixed; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 40; padding: 6px 12px; border-radius: 999px; background: var(--ink); color: var(--lime); font: 600 12px/1 var(--font); letter-spacing: .04em; box-shadow: var(--shadow); }
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+
+  
+</head>
+<body>
+<div class="bg-grid" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <header class="nav-wrap">
+    <nav class="nav glass">
+      <a href="#" class="brand"><span class="brand-mark"></span><span data-bind="clinic.name">Aurelia Dental</span></a>
+      <ul class="nav-links">
+        <li><a href="#treatments">Treatments</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#team">Specialists</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="btn btn-ghost hide-sm" data-href="tel">Call us</a>
+        <a class="btn btn-primary" href="#book">Book a visit</a>
+      </div>
+      <button class="nav-burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-sheet">
+          <div class="hero-top">
+            <h1 class="wordmark" aria-label="Aurelia Dental, dentist in Sushant Lok, Gurugram">AURELIA<span>.</span></h1>
+          </div>
+          <div class="hero-3d" id="hero3d" aria-hidden="true"><div class="hero-3d-fallback"></div></div>
+
+          <div class="hero-meta-l reveal">
+            <div class="avatar-row"><div class="avatars"><span>R</span><span>A</span><span>N</span></div><b>12k+</b></div>
+            <small>Smiles transformed in Gurugram</small>
+          </div>
+          <ul class="hero-meta-r reveal">
+            <li>Painless care <span>/01</span></li>
+            <li>Digital diagnostics <span>/02</span></li>
+            <li>Same-day treatment <span>/03</span></li>
+          </ul>
+
+          <div class="slot-chip reveal"><span class="pulse"></span><div><small>Next available</small><b id="nextSlot">Checking…</b></div></div>
+
+          <div class="hero-copy reveal">
+            <p class="hero-tag">The dental studio that keeps your smile flawless with digital diagnostics and specialist care.</p>
+            <div class="hero-actions">
+              <a href="#book" class="btn btn-primary btn-lg">Book an appointment <span class="arr">→</span></a>
+              <a href="#pricing" class="btn btn-ghost btn-lg">See pricing</a>
+            </div>
+          </div>
+
+          <a href="#book" class="orb-btn reveal"><span>▶</span> Book a visit</a>
+        </div>
+        <div class="stats reveal" id="stats"></div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <section class="marquee" aria-label="Technology we use">
+      <div class="marquee-track">
+        <span>CBCT 3D Imaging</span><span>Intra-oral Scanning</span><span>Digital Smile Design</span><span>Rotary Endodontics</span><span>Soft-tissue Laser</span><span>Guided Implant Surgery</span><span>In-house Lab</span><span>Class-B Sterilisation</span>
+        <span>CBCT 3D Imaging</span><span>Intra-oral Scanning</span><span>Digital Smile Design</span><span>Rotary Endodontics</span><span>Soft-tissue Laser</span><span>Guided Implant Surgery</span><span>In-house Lab</span><span>Class-B Sterilisation</span>
+      </div>
+    </section>
+
+    <!-- BENTO / WHY -->
+    <section class="section" id="why">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Why patients switch to us</span>
+          <h2>A clinic built like a <em>product</em>,<br />not a waiting room.</h2>
+        </div>
+        <div class="bento">
+          <article class="b-card b-wide glass reveal">
+            <div class="b-copy">
+              <h3>See your result before you commit</h3>
+              <p>Digital Smile Design and 3D aligner simulations show you the finished smile on screen at your first visit.</p>
+            </div>
+            <div class="b-viz compare">
+              <div class="cmp before"><span>Before</span></div>
+              <div class="cmp after"><span>After</span></div>
+            </div>
+          </article>
+          <article class="b-card glass reveal">
+            <div class="b-icon" data-icon="shield"></div>
+            <h3>Written estimates</h3>
+            <p>An itemised plan and price before treatment starts. The quote is the bill.</p>
+          </article>
+          <article class="b-card glass reveal">
+            <div class="b-icon" data-icon="bolt"></div>
+            <h3>Single-visit care</h3>
+            <p>Root canals, same-day crowns and emergency relief, often in one sitting.</p>
+          </article>
+          <article class="b-card glass reveal">
+            <div class="b-icon" data-icon="team"></div>
+            <h3>Specialists, not generalists</h3>
+            <p>Implantologists, orthodontists, endodontists and surgeons under one roof.</p>
+          </article>
+          <article class="b-card b-tall glass reveal">
+            <h3>Sterilisation you can audit</h3>
+            <p>Class-B autoclaves, sealed instrument pouches opened in front of you and a log for every chair.</p>
+            <ul class="checklist">
+              <li>Sealed, single-use kits</li><li>HEPA air purification</li><li>Logged autoclave cycles</li><li>Disposable bibs &amp; covers</li>
+            </ul>
+          </article>
+          <article class="b-card b-wide glass reveal">
+            <div class="b-copy">
+              <h3>Book in 60 seconds, get reminded automatically</h3>
+              <p>Real-time slots, instant confirmation and a calendar invite. Reschedule with one WhatsApp message.</p>
+            </div>
+            <div class="b-viz mini-cal" id="miniCal"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONCERN GUIDE -->
+    <section class="section section-tight" id="guide">
+      <div class="container">
+        <div class="guide glass reveal">
+          <div>
+            <span class="eyebrow">Not sure what you need?</span>
+            <h2 class="h2-sm">Start with what you're <em>feeling</em>.</h2>
+            <p class="muted">Pick a concern and we'll show the treatments to discuss. A dentist confirms the diagnosis at your visit.</p>
+          </div>
+          <div class="concerns" id="concerns"></div>
+          <div class="concern-result" id="concernResult"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TREATMENTS -->
+    <section class="section" id="treatments">
+      <div class="container">
+        <div class="section-head row reveal">
+          <div>
+            <span class="eyebrow">Treatments</span>
+            <h2>Everything your smile needs,<br /><em>one</em> address.</h2>
+          </div>
+          <div class="tabs" id="catTabs" role="tablist"></div>
+        </div>
+        <div class="t-grid" id="tGrid"></div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Transparent pricing</span>
+          <h2>Know the number <em>before</em> the chair.</h2>
+          <p class="muted">Starting ranges for Gurugram. Your final estimate depends on clinical findings and materials, and is always given in writing. No-cost EMI on treatments over ₹15,000.</p>
+        </div>
+        <div class="pricing-wrap">
+          <div class="price-table glass reveal">
+            <div class="pt-head"><span>Treatment</span><span>Starting range</span><span></span></div>
+            <div id="priceRows"></div>
+          </div>
+          <aside class="estimator glass reveal" id="estimator">
+            <span class="eyebrow">Your estimate</span>
+            <div class="est-total" id="estTotal">₹0</div>
+            <p class="muted small" id="estHint">Add treatments from the list to build a rough plan.</p>
+            <ul class="est-list" id="estList"></ul>
+            <div class="est-emi" id="estEmi"></div>
+            <a href="#book" class="btn btn-primary w-full" id="estBook">Book a consultation</a>
+            <p class="tiny">Indicative only. Confirmed after a ₹500 consultation, adjusted against your treatment.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section section-tight">
+      <div class="container">
+        <div class="steps">
+          <div class="step reveal"><b>01</b><h4>Book online</h4><p>Choose a treatment and a live slot. Instant confirmation.</p></div>
+          <div class="step reveal"><b>02</b><h4>Digital check-up</h4><p>Scan, X-ray and a no-pressure conversation with a specialist.</p></div>
+          <div class="step reveal"><b>03</b><h4>Written plan</h4><p>Options, timelines and an itemised estimate you can take home.</p></div>
+          <div class="step reveal"><b>04</b><h4>Treatment &amp; aftercare</h4><p>Comfort-first procedures and follow-ups on WhatsApp.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="section" id="team">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Specialists</span>
+          <h2>The people behind <em>your</em> smile.</h2>
+        </div>
+        <div class="team" id="teamGrid"></div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section section-tight">
+      <div class="container">
+        <div class="quotes" id="quotes"></div>
+      </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section class="section" id="book">
+      <div class="orb orb-c"></div>
+      <div class="container">
+        <div class="book-shell glass reveal">
+          <div class="book-side">
+            <span class="eyebrow">Book an appointment</span>
+            <h2 class="h2-sm">Pick a slot.<br /><em>We'll handle the rest.</em></h2>
+            <ol class="book-steps" id="bookSteps">
+              <li class="active"><span>1</span>Treatment</li>
+              <li><span>2</span>Date &amp; time</li>
+              <li><span>3</span>Your details</li>
+            </ol>
+            <div class="book-contact">
+              <p class="muted small">Prefer to talk?</p>
+              <a class="btn btn-ghost w-full" data-href="tel">Call <span data-bind="clinic.phone"></span></a>
+              <a class="btn btn-ghost w-full" data-href="wa" target="_blank" rel="noopener">WhatsApp us</a>
+            </div>
+          </div>
+
+          <div class="book-main">
+            <!-- step 1 -->
+            <div class="b-step active" data-step="1">
+              <h3>What brings you in?</h3>
+              <div class="treat-pick" id="treatPick"></div>
+              <div class="b-nav"><span></span><button class="btn btn-primary" data-next="2" disabled>Continue →</button></div>
+            </div>
+            <!-- step 2 -->
+            <div class="b-step" data-step="2">
+              <h3>Choose a date</h3>
+              <div class="days" id="days"></div>
+              <h3 class="mt">Available times</h3>
+              <div class="times" id="times"><p class="muted small">Pick a date to see open slots.</p></div>
+              <div class="b-nav"><button class="btn btn-ghost" data-prev="1">← Back</button><button class="btn btn-primary" data-next="3" disabled>Continue →</button></div>
+            </div>
+            <!-- step 3 -->
+            <div class="b-step" data-step="3">
+              <h3>Your details</h3>
+              <div class="summary" id="summary"></div>
+              <form id="bookForm" novalidate>
+                <div class="field-row">
+                  <label class="field"><span>Full name</span><input name="name" autocomplete="name" required /><em></em></label>
+                  <label class="field"><span>Phone</span><input name="phone" type="tel" autocomplete="tel" placeholder="+91" required /><em></em></label>
+                </div>
+                <label class="field"><span>Email <small>(for confirmation &amp; invite)</small></span><input name="email" type="email" autocomplete="email" /><em></em></label>
+                <label class="field"><span>Anything we should know? <small>(optional)</small></span><textarea name="notes" rows="3" placeholder="Pain, previous treatment, anxiety, medical conditions…"></textarea></label>
+                <p class="form-error" id="formError" role="alert"></p>
+                <p class="tiny">${label}: bookings made here are simulated and not sent to the clinic.</p>
+                <div class="b-nav"><button type="button" class="btn btn-ghost" data-prev="2">← Back</button><button class="btn btn-primary" type="submit" id="submitBtn">Confirm booking</button></div>
+              </form>
+            </div>
+            <!-- done -->
+            <div class="b-step" data-step="done">
+              <div class="done-box">
+                <div class="done-badge">✓</div>
+                <h3>You're booked!</h3>
+                <p class="muted" id="doneText"></p>
+                <div class="ref" id="doneRef"></div>
+                <div class="done-actions">
+                  <a class="btn btn-primary" id="gcalLink" target="_blank" rel="noopener">Add to Google Calendar</a>
+                  <a class="btn btn-ghost" id="waLink" target="_blank" rel="noopener">Message us on WhatsApp</a>
+                </div>
+                <button class="link" id="bookAnother">Book another appointment</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container faq-wrap">
+        <div class="reveal">
+          <span class="eyebrow">FAQ</span>
+          <h2>Questions, <em>answered</em>.</h2>
+          <p class="muted">Still unsure? Leave your number and a specialist calls you back, usually within the hour.</p>
+          <form class="callback glass" id="callbackForm" novalidate>
+            <input name="name" placeholder="Your name" aria-label="Your name" />
+            <input name="phone" type="tel" placeholder="Phone number" aria-label="Phone number" />
+            <button class="btn btn-primary" type="submit">Request callback</button>
+            <p class="small" id="cbMsg" role="status"></p>
+          </form>
+        </div>
+        <div class="faqs reveal" id="faqs"></div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section section-tight">
+      <div class="container">
+        <div class="cta reveal">
+          <h2>Your best smile is <em>one visit</em> away.</h2>
+          <p>Consultation, digital scan and written plan for ₹500, adjusted against your treatment.</p>
+          <a href="#book" class="btn btn-light btn-lg">Book your consultation →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER / VISIT -->
+  <footer class="footer" id="visit">
+    <div class="container foot-grid">
+      <div>
+        <a href="#" class="brand"><span class="brand-mark"></span><span data-bind="clinic.name"></span></a>
+        <p class="muted small mt-s" data-bind="clinic.tagline"></p>
+        <p class="small mt-s" data-bind="clinic.address"></p>
+        <p class="small"><a data-href="tel" data-bind="clinic.phone"></a> · <a data-href="mail" data-bind="clinic.email"></a></p>
+      </div>
+      <div>
+        <h5>Hours</h5>
+        <ul class="hours" id="hours"></ul>
+      </div>
+      <a class="map glass map-link" href="https://www.google.com/maps/search/?api=1&query=Sushant%20Lok%20Phase%201%2C%20Sector%2043%2C%20Gurugram" target="_blank" rel="noopener"><span>Sushant Lok Phase I, Sector 43</span><b>Open in Google Maps →</b></a>
+    </div>
+    <div class="container foot-bottom">
+      <small>© <span id="yr"></span> <span data-bind="clinic.name"></span>. All rights reserved.</small>
+      <small>Demo website · Sample content</small>
+    </div>
+    <div class="footer-word" aria-hidden="true">AURELIA<span>.</span></div>
+  </footer>
+
+  <a class="wa-fab" data-href="wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+  </a>
+
+  
+  
+
+<script>
+(() => {
+  const DATA = {"clinic":{"name":"Aurelia Dental","tagline":"Precision dentistry, designed around you.","area":"Sushant Lok, Gurugram","address":"C-Block, Sushant Lok Phase I, Sector 43, Gurugram, Haryana 122009","phone":"+91 90000 00000","whatsapp":"919000000000","email":"hello@aureliadental.in","mapQuery":"Sushant Lok Phase 1, Sector 43, Gurugram","timezone":"Asia/Kolkata"},"hours":{"0":{"open":"10:00","close":"14:00"},"1":{"open":"10:00","close":"20:00"},"2":{"open":"10:00","close":"20:00"},"3":{"open":"10:00","close":"20:00"},"4":{"open":"10:00","close":"20:00"},"5":{"open":"10:00","close":"20:00"},"6":{"open":"10:00","close":"18:00"}},"lunchBreak":{"start":"14:00","end":"15:00"},"categories":[{"id":"preventive","label":"Preventive"},{"id":"restorative","label":"Restorative"},{"id":"cosmetic","label":"Cosmetic"},{"id":"orthodontic","label":"Orthodontics"},{"id":"implants","label":"Implants"},{"id":"surgical","label":"Surgery & Gums"}],"treatments":[{"id":"consult","name":"Consultation & Digital Check-up","category":"preventive","icon":"scan","duration":30,"priceFrom":500,"priceTo":500,"unit":"visit","popular":true,"blurb":"Full oral exam, intra-oral scan and a written treatment plan with transparent estimates.","concerns":["Toothache or sensitivity"]},{"id":"cleaning","name":"Painless Cleaning & Polishing","category":"preventive","icon":"sparkle","duration":45,"priceFrom":1500,"priceTo":3000,"unit":"session","blurb":"Ultrasonic scaling and air-polishing to remove plaque and tartar, plus home-care coaching.","concerns":["Plaque or tartar buildup"]},{"id":"kids","name":"Children's Dentistry","category":"preventive","icon":"smile","duration":30,"priceFrom":800,"priceTo":4000,"unit":"visit","blurb":"Gentle check-ups, fluoride, sealants and cavity care in a calm, kid-friendly setting.","concerns":["Dental concerns involving a child"]},{"id":"filling","name":"Tooth-Coloured Fillings","category":"restorative","icon":"tooth","duration":30,"priceFrom":1200,"priceTo":3500,"unit":"tooth","blurb":"Composite restorations that match your natural shade and seal out further decay.","concerns":["A broken or weakened tooth"]},{"id":"rct","name":"Single-Visit Root Canal","category":"restorative","icon":"bolt","duration":90,"priceFrom":5500,"priceTo":12000,"unit":"tooth","popular":true,"blurb":"Rotary endodontics under local anaesthesia, often completed in a single sitting.","concerns":["Possible tooth infection"]},{"id":"crowns","name":"Crowns & Bridges","category":"restorative","icon":"crown","duration":60,"priceFrom":6000,"priceTo":22000,"unit":"unit","blurb":"Zirconia and E.max crowns milled with digital precision to protect weak teeth or replace gaps.","concerns":["A broken or weakened tooth","Missing teeth"]},{"id":"whitening","name":"Professional Teeth Whitening","category":"cosmetic","icon":"sun","duration":60,"priceFrom":8000,"priceTo":18000,"unit":"session","blurb":"In-chair whitening that lifts several shades in about an hour, with sensitivity care.","concerns":["Discoloured or uneven-looking teeth"]},{"id":"veneers","name":"Veneers & Lumineers","category":"cosmetic","icon":"gem","duration":60,"priceFrom":10000,"priceTo":25000,"unit":"tooth","blurb":"Ultra-thin porcelain shells that reshape and brighten your smile with minimal prep.","concerns":["Discoloured or uneven-looking teeth"]},{"id":"smile","name":"Digital Smile Design & Makeover","category":"cosmetic","icon":"wand","duration":60,"priceFrom":35000,"priceTo":300000,"unit":"plan","popular":true,"blurb":"Preview your new smile on screen before treatment, then combine whitening, veneers and alignment.","concerns":["Discoloured or uneven-looking teeth"]},{"id":"braces","name":"Orthodontic Braces","category":"orthodontic","icon":"grid","duration":45,"priceFrom":35000,"priceTo":85000,"unit":"full case","blurb":"Metal, ceramic and self-ligating braces for crowding, gaps and bite correction.","concerns":["Crowded or misaligned teeth"]},{"id":"aligners","name":"Clear Aligners","category":"orthodontic","icon":"layers","duration":45,"priceFrom":90000,"priceTo":250000,"unit":"full case","popular":true,"blurb":"Removable, near-invisible trays planned in 3D so you see the end result on day one.","concerns":["Crowded or misaligned teeth"]},{"id":"implant","name":"Single Tooth Implant","category":"implants","icon":"pillar","duration":90,"priceFrom":28000,"priceTo":65000,"unit":"tooth incl. crown","popular":true,"blurb":"Premium titanium implants placed with CBCT-guided surgery for a fixed, natural-feeling tooth.","concerns":["Missing teeth"]},{"id":"allon4","name":"All-on-4 / Full-Mouth Implants","category":"implants","icon":"arch","duration":120,"priceFrom":250000,"priceTo":450000,"unit":"arch","blurb":"A full fixed arch on four to six implants, often with teeth the same day.","concerns":["Missing teeth"]},{"id":"dentures","name":"Dentures","category":"implants","icon":"arch","duration":60,"priceFrom":15000,"priceTo":60000,"unit":"arch","blurb":"Comfortable, natural-looking removable or implant-retained dentures.","concerns":["Missing teeth"]},{"id":"wisdom","name":"Wisdom Tooth Extraction","category":"surgical","icon":"scissors","duration":60,"priceFrom":3000,"priceTo":12000,"unit":"tooth","blurb":"Careful removal of impacted or problem wisdom teeth with imaging-led planning.","concerns":["Toothache or sensitivity"]},{"id":"gums","name":"Gum Treatment & Laser Care","category":"surgical","icon":"leaf","duration":60,"priceFrom":4000,"priceTo":25000,"unit":"quadrant","blurb":"Deep cleaning, periodontal therapy and soft-tissue laser for bleeding or receding gums.","concerns":["Bleeding or swollen gums"]}],"stats":[{"value":"12k+","label":"Smiles treated"},{"value":"4.9","label":"Average patient rating"},{"value":"18","label":"Specialists on call"},{"value":"0","label":"Hidden charges"}],"doctors":[{"name":"Dr. Ananya Rao","role":"Implantologist & Founder","creds":"BDS, MDS (Prosthodontics)","years":15},{"name":"Dr. Kabir Mehta","role":"Orthodontist","creds":"BDS, MDS (Orthodontics)","years":11},{"name":"Dr. Ira Kapoor","role":"Endodontist","creds":"BDS, MDS (Conservative & Endo)","years":9},{"name":"Dr. Vihaan Sethi","role":"Oral & Maxillofacial Surgeon","creds":"BDS, MDS (OMFS)","years":12}],"testimonials":[{"name":"Riya S.","treatment":"Clear Aligners","text":"They showed me my final smile in 3D before we even started. Ten months later it looks exactly like the preview."},{"name":"Arjun M.","treatment":"Single-Visit Root Canal","text":"Walked in with throbbing pain at 11, walked out pain-free by 1. The estimate they gave me was the bill I paid."},{"name":"Neha & Karan","treatment":"Implants","text":"Booking online took two minutes and the reminders were spot on. The clinic feels more like a spa than a hospital."}],"faqs":[{"q":"How much does treatment cost?","a":"Every treatment on this page lists a starting range. Your exact estimate depends on clinical complexity and materials, and you get it in writing after your consultation, before any work begins."},{"q":"Is root canal treatment painful?","a":"We use local anaesthesia and rotary instruments, so most patients feel pressure rather than pain. Mild tenderness for a day or two afterwards is normal."},{"q":"Am I suitable for dental implants?","a":"Most adults with missing teeth are, but it depends on gum health, bone volume and medical history. A CBCT scan at your consultation tells us for sure."},{"q":"Aligners or braces: which is better?","a":"Neither is best for everyone. Aligners suit many mild-to-moderate cases and are discreet; braces handle a wider range of complex movements. We show you both plans."},{"q":"Do you offer EMI or insurance support?","a":"Yes. No-cost EMI is available on treatments above ₹15,000 through partner lenders, and we provide itemised invoices for insurance and reimbursement claims."},{"q":"How do I reschedule or cancel?","a":"Reply to your confirmation email or WhatsApp us at least 4 hours before your slot. There is no charge for rescheduling."}]};
+  const R = {"slotMinutes":30,"chairs":2,"bookingWindowDays":30,"minLeadMinutes":120};
+  const booked = [];
+  const toMin = (s) => { const [h, m] = s.split(':').map(Number); return h * 60 + m; };
+  const toHHMM = (m) => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+  const wd = (d) => new Date(d + 'T00:00:00Z').getUTCDay();
+  const addDays = (d, n) => { const x = new Date(d + 'T00:00:00Z'); x.setUTCDate(x.getUTCDate() + n); return x.toISOString().slice(0, 10); };
+  function now() {
+    const p = new Intl.DateTimeFormat('en-CA', { timeZone: DATA.clinic.timezone, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(new Date());
+    const g = (t) => p.find((x) => x.type === t).value;
+    return { date: g('year') + '-' + g('month') + '-' + g('day'), minutes: +g('hour') * 60 + +g('minute') };
+  }
+  const dur = (id) => (DATA.treatments.find((t) => t.id === id) || { duration: R.slotMinutes }).duration;
+  function slots(date, tid) {
+    const h = DATA.hours[wd(date)]; if (!h) return [];
+    const n = now(); if (date < n.date || date > addDays(n.date, R.bookingWindowDays)) return [];
+    const d = dur(tid), lunch = wd(date) !== 0 ? [toMin(DATA.lunchBreak.start), toMin(DATA.lunchBreak.end)] : null;
+    const busy = new Map();
+    booked.filter((b) => b.date === date).forEach((b) => { for (let m = toMin(b.time); m < toMin(b.time) + dur(b.treatment); m += R.slotMinutes) busy.set(m, (busy.get(m) || 0) + 1); });
+    const out = [];
+    for (let t = toMin(h.open); t + d <= toMin(h.close); t += R.slotMinutes) {
+      if (lunch && t < lunch[1] && t + d > lunch[0]) continue;
+      if (date === n.date && t < n.minutes + R.minLeadMinutes) continue;
+      let ok = true; for (let m = t; m < t + d; m += R.slotMinutes) if ((busy.get(m) || 0) >= R.chairs) ok = false;
+      if (ok) out.push(toHHMM(t));
+    }
+    return out;
+  }
+  const json = (body, status = 200) => Promise.resolve(new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } }));
+  const realFetch = window.fetch.bind(window);
+  window.fetch = (url, opts = {}) => {
+    if (typeof url !== 'string' || !url.startsWith('/api/')) return realFetch(url, opts);
+    const u = new URL(url, 'https://preview.local');
+    if (u.pathname === '/api/clinic') return json(DATA);
+    if (u.pathname === '/api/availability') {
+      const t = u.searchParams.get('treatment'), d = u.searchParams.get('date');
+      if (d) return json({ date: d, slots: slots(d, t) });
+      const today = now().date;
+      return json({ days: Array.from({ length: 14 }, (_, i) => { const date = addDays(today, i); return { date, weekday: wd(date), slots: slots(date, t).length }; }) });
+    }
+    const b = JSON.parse(opts.body || '{}');
+    if (u.pathname === '/api/appointments') {
+      const fields = {};
+      if (!b.name || b.name.trim().length < 2) fields.name = 'Please enter your name';
+      if (!/^\+?[0-9\s-]{8,16}$/.test(b.phone || '')) fields.phone = 'Please enter a valid phone number';
+      if (b.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email)) fields.email = 'Please enter a valid email';
+      if (Object.keys(fields).length) return json({ error: 'Please check the form', fields }, 400);
+      if (!slots(b.date, b.treatment).includes(b.time)) return json({ error: 'That slot was just taken. Please pick another time.' }, 409);
+      booked.push({ date: b.date, time: b.time, treatment: b.treatment });
+      const ref = 'AD-' + Math.random().toString(16).slice(2, 8).toUpperCase();
+      return json({ ref, date: b.date, time: b.time }, 201);
+    }
+    if (u.pathname === '/api/callbacks') {
+      if (!b.name || b.name.trim().length < 2 || !/^\+?[0-9\s-]{8,16}$/.test(b.phone || '')) return json({ error: 'Please enter your name and a valid phone number' }, 400);
+      return json({ ok: true }, 201);
+    }
+    return json({ error: 'Not found' }, 404);
+  };
+})();</script>
+<script>(() => {
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const inr = (n) => '₹' + Number(n).toLocaleString('en-IN');
+  const compact = (n) => n >= 100000 ? `₹${(n / 100000).toFixed(n % 100000 ? 1 : 0)}L` : inr(n);
+  const range = (t) => t.priceFrom === t.priceTo ? inr(t.priceFrom) : `${compact(t.priceFrom)} – ${compact(t.priceTo)}`;
+  const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const fmtTime = (hhmm) => { const [h, m] = hhmm.split(':').map(Number); return `${((h + 11) % 12) + 1}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; };
+  const fmtDate = (d) => { const x = new Date(d + 'T00:00:00'); return `${DAYS[x.getDay()]}, ${x.getDate()} ${MONTHS[x.getMonth()]}`; };
+
+  const ICONS = {
+    scan: '<path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M4 12h16"/>',
+    sparkle: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 17l.7 1.8 1.8.7-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7z"/>',
+    smile: '<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
+    tooth: '<path d="M7 3c2-1 3.5-.5 5 .3 1.5-.8 3-1.3 5-.3 3 1.5 2.5 6 1.5 9-.7 2.3-1 7.5-2.8 8-1.7.5-1.7-4.5-3.7-4.5S10 20.5 8.3 20c-1.8-.5-2.1-5.7-2.8-8C4.5 9 4 4.5 7 3z"/>',
+    bolt: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+    crown: '<path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    gem: '<path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M12 21L8 9l4-6 4 6z"/>',
+    wand: '<path d="M15 4V2M15 10V8M11 6h2M17 6h2M4 20L14 10"/><path d="M19 13l.5 1.5L21 15l-1.5.5L19 17l-.5-1.5L17 15l1.5-.5z"/>',
+    grid: '<rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7v10M12 7v10M17 7v10M3 12h18"/>',
+    layers: '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
+    pillar: '<path d="M8 3h8v5H8zM10 8v3h4V8M9 11h6l-1 10h-4z"/><path d="M9.5 14h5M9.7 17h4.6"/>',
+    arch: '<path d="M3 15c0-5 4-9 9-9s9 4 9 9"/><path d="M6 15v3M9 12v6M12 11v7M15 12v6M18 15v3"/>',
+    scissors: '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.1 15.9M14.5 14.5L20 20M8.1 8.1L12 12"/>',
+    leaf: '<path d="M11 20A7 7 0 0 1 4 13C4 7 9 3 20 3c0 11-4 17-9 17z"/><path d="M4 21c3-5 6-8 11-11"/>',
+    shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+    team: '<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 1.8 6 5.5"/>',
+  };
+  const icon = (n) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[n] || ICONS.tooth}</svg>`;
+
+  let DATA;
+  const state = { treatment: null, date: null, time: null, estimate: new Map() };
+
+  async function api(path, opts = {}) {
+    const res = await fetch(path, { headers: { 'Content-Type': 'application/json' }, ...opts });
+    const body = await res.json().catch(() => ({}));
+    if (!res.ok) throw Object.assign(new Error(body.error || 'Request failed'), { body, status: res.status });
+    return body;
+  }
+
+  // ---------- Static render ----------
+  function bindClinic() {
+    const c = DATA.clinic;
+    $$('[data-bind]').forEach((el) => {
+      const v = el.dataset.bind.split('.').reduce((o, k) => o?.[k], DATA);
+      if (v != null) el.textContent = v;
+    });
+    const tel = 'tel:' + c.phone.replace(/\s/g, '');
+    const wa = `https://wa.me/${c.whatsapp}?text=${encodeURIComponent(`Hi ${c.name}, I'd like to book an appointment.`)}`;
+    $$('[data-href="tel"]').forEach((a) => (a.href = tel));
+    $$('[data-href="wa"]').forEach((a) => (a.href = wa));
+    $$('[data-href="mail"]').forEach((a) => (a.href = 'mailto:' + c.email));
+    const mf = $('#mapFrame'); if (mf) mf.src = `https://www.google.com/maps?q=${encodeURIComponent(c.mapQuery)}&output=embed`;
+    $('#yr').textContent = new Date().getFullYear();
+  }
+
+  function renderStats() {
+    $('#stats').innerHTML = DATA.stats.map((s) => `<div class="stat"><b data-count="${esc(s.value)}">${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join('');
+  }
+
+  function renderHours() {
+    const today = new Date().getDay();
+    const order = [1, 2, 3, 4, 5, 6, 0];
+    $('#hours').innerHTML = order.map((d) => {
+      const h = DATA.hours[d];
+      return `<li class="${d === today ? 'today' : ''}"><span>${DAYS[d]}</span><span>${h ? `${fmtTime(h.open)} – ${fmtTime(h.close)}` : 'Closed'}</span></li>`;
+    }).join('');
+  }
+
+  function renderTabs() {
+    const cats = [{ id: 'all', label: 'All' }, ...DATA.categories];
+    $('#catTabs').innerHTML = cats.map((c, i) => `<button class="tab ${i ? '' : 'active'}" role="tab" data-cat="${c.id}">${esc(c.label)}</button>`).join('');
+    $('#catTabs').addEventListener('click', (e) => {
+      const b = e.target.closest('.tab'); if (!b) return;
+      $$('.tab').forEach((t) => t.classList.toggle('active', t === b));
+      renderTreatments(b.dataset.cat);
+    });
+  }
+
+  function renderTreatments(cat = 'all') {
+    const list = DATA.treatments.filter((t) => cat === 'all' || t.category === cat);
+    $('#tGrid').innerHTML = list.map((t, i) => `
+      <article class="t-card glass" style="animation-delay:${i * 40}ms">
+        <div class="t-top"><div class="t-icon">${icon(t.icon)}</div>${t.popular ? '<span class="badge">Popular</span>' : ''}</div>
+        <h3>${esc(t.name)}</h3>
+        <p>${esc(t.blurb)}</p>
+        <div class="t-foot">
+          <div class="t-price"><small>From</small><b>${inr(t.priceFrom)}</b></div>
+          <button class="t-book" data-book="${t.id}" aria-label="Book ${esc(t.name)}">→</button>
+        </div>
+      </article>`).join('');
+  }
+
+  function renderPricing() {
+    const rows = DATA.categories.map((c) => {
+      const ts = DATA.treatments.filter((t) => t.category === c.id);
+      return `<div class="pt-group">${esc(c.label)}</div>` + ts.map((t) => `
+        <div class="pt-row">
+          <div class="n">${esc(t.name)}<small>~${t.duration} min per visit</small></div>
+          <div class="p">${range(t)} <small>/ ${esc(t.unit)}</small></div>
+          <button class="add-btn" data-est="${t.id}">+ Add</button>
+        </div>`).join('');
+    }).join('');
+    $('#priceRows').innerHTML = rows;
+    $('#priceRows').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-est]'); if (!b) return;
+      toggleEstimate(b.dataset.est);
+    });
+    $('#estList').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-rm]'); if (b) toggleEstimate(b.dataset.rm);
+    });
+  }
+
+  function toggleEstimate(id) {
+    state.estimate.has(id) ? state.estimate.delete(id) : state.estimate.set(id, 1);
+    $$(`[data-est="${id}"]`).forEach((b) => { const on = state.estimate.has(id); b.classList.toggle('added', on); b.textContent = on ? '✓ Added' : '+ Add'; });
+    const items = [...state.estimate.keys()].map((k) => DATA.treatments.find((t) => t.id === k));
+    const lo = items.reduce((s, t) => s + t.priceFrom, 0), hi = items.reduce((s, t) => s + t.priceTo, 0);
+    $('#estTotal').textContent = items.length ? (lo === hi ? inr(lo) : `${compact(lo)} – ${compact(hi)}`) : '₹0';
+    $('#estHint').textContent = items.length ? `${items.length} treatment${items.length > 1 ? 's' : ''} · per unit pricing` : 'Add treatments from the list to build a rough plan.';
+    $('#estList').innerHTML = items.map((t) => `<li><span>${esc(t.name)}</span><span>${inr(t.priceFrom)}+ <button data-rm="${t.id}" aria-label="Remove">✕</button></span></li>`).join('');
+    $('#estEmi').textContent = lo >= 15000 ? `No-cost EMI from ~${inr(Math.round(lo / 12))}/month over 12 months` : '';
+  }
+
+  function renderGuide() {
+    const concerns = [...new Set(DATA.treatments.flatMap((t) => t.concerns))];
+    $('#concerns').innerHTML = concerns.map((c) => `<button class="chip" data-concern="${esc(c)}">${esc(c)}</button>`).join('');
+    $('#concerns').addEventListener('click', (e) => {
+      const b = e.target.closest('.chip'); if (!b) return;
+      const on = !b.classList.contains('active');
+      $$('.chip').forEach((c) => c.classList.remove('active'));
+      if (!on) { $('#concernResult').innerHTML = ''; return; }
+      b.classList.add('active');
+      const matches = DATA.treatments.filter((t) => t.concerns.includes(b.dataset.concern));
+      $('#concernResult').innerHTML = matches.map((t) => `
+        <div class="cr-card"><div><b>${esc(t.name)}</b><small>From ${inr(t.priceFrom)} · ~${t.duration} min</small></div>
+        <button class="btn btn-ghost" data-book="${t.id}">Book</button></div>`).join('');
+    });
+  }
+
+  function renderTeam() {
+    const hues = ['rgba(212,244,90,.75)', 'rgba(160,176,198,.6)', 'rgba(212,244,90,.5)', 'rgba(160,176,198,.45)'];
+    $('#teamGrid').innerHTML = DATA.doctors.map((d, i) => {
+      const initials = d.name.replace(/^Dr\.?\s*/, '').split(' ').map((w) => w[0]).join('').slice(0, 2);
+      return `<article class="doc reveal">
+        <div class="doc-ph" style="--c1:${hues[i % hues.length]}"><span>${esc(initials)}</span><i>${d.years}+ yrs</i></div>
+        <div class="doc-info"><h4>${esc(d.name)}</h4><p>${esc(d.role)}</p><small>${esc(d.creds)}</small></div>
+      </article>`;
+    }).join('');
+  }
+
+  function renderQuotes() {
+    $('#quotes').innerHTML = DATA.testimonials.map((q) => `
+      <blockquote class="quote glass reveal"><p>${esc(q.text)}</p>
+        <footer><b>${esc(q.name)}</b><span>${esc(q.treatment)}</span></footer></blockquote>`).join('');
+  }
+
+  function renderFaqs() {
+    $('#faqs').innerHTML = DATA.faqs.map((f, i) => `
+      <div class="faq ${i === 0 ? 'open' : ''}"><button aria-expanded="${i === 0}">${esc(f.q)}<i>+</i></button><div><p>${esc(f.a)}</p></div></div>`).join('');
+    $('#faqs').addEventListener('click', (e) => {
+      const b = e.target.closest('button'); if (!b) return;
+      const f = b.parentElement, open = !f.classList.contains('open');
+      $$('.faq').forEach((x) => { x.classList.remove('open'); x.firstElementChild.setAttribute('aria-expanded', 'false'); });
+      if (open) { f.classList.add('open'); b.setAttribute('aria-expanded', 'true'); }
+    });
+  }
+
+  // ---------- Booking wizard ----------
+  function goStep(n) {
+    $$('.b-step').forEach((s) => s.classList.toggle('active', s.dataset.step === String(n)));
+    $$('#bookSteps li').forEach((li, i) => {
+      li.classList.toggle('active', String(i + 1) === String(n));
+      li.classList.toggle('done', n === 'done' || i + 1 < n);
+    });
+  }
+
+  function renderTreatPick() {
+    $('#treatPick').innerHTML = DATA.treatments.map((t) => `
+      <button class="tp" data-tid="${t.id}"><b>${esc(t.name)}</b><small>From ${inr(t.priceFrom)} · ${t.duration} min</small></button>`).join('');
+    $('#treatPick').addEventListener('click', (e) => {
+      const b = e.target.closest('.tp'); if (b) selectTreatment(b.dataset.tid);
+    });
+  }
+
+  function selectTreatment(id) {
+    state.treatment = id; state.date = null; state.time = null;
+    $$('.tp').forEach((x) => x.classList.toggle('sel', x.dataset.tid === id));
+    $('[data-next="2"]').disabled = false;
+  }
+
+  async function loadDays() {
+    $('#days').innerHTML = '<p class="muted small">Loading availability…</p>';
+    $('#times').innerHTML = '<p class="muted small">Pick a date to see open slots.</p>';
+    $('[data-next="3"]').disabled = true;
+    const { days } = await api(`/api/availability?treatment=${state.treatment}`);
+    $('#days').innerHTML = days.map((d) => {
+      const x = new Date(d.date + 'T00:00:00');
+      return `<button class="day" data-date="${d.date}" ${d.slots ? '' : 'disabled'}>
+        <small>${DAYS[d.weekday]}</small><b>${x.getDate()}</b><i>${d.slots ? `${d.slots} open` : 'Full'}</i></button>`;
+    }).join('');
+    const first = days.find((d) => d.slots);
+    if (first) pickDate(first.date);
+  }
+
+  async function pickDate(date) {
+    state.date = date; state.time = null;
+    $('[data-next="3"]').disabled = true;
+    $$('.day').forEach((d) => d.classList.toggle('sel', d.dataset.date === date));
+    $('#times').innerHTML = '<p class="muted small">Loading…</p>';
+    const { slots } = await api(`/api/availability?treatment=${state.treatment}&date=${date}`);
+    $('#times').innerHTML = slots.length
+      ? slots.map((s) => `<button class="time" data-time="${s}">${fmtTime(s)}</button>`).join('')
+      : '<p class="muted small">No slots left on this day.</p>';
+  }
+
+  function renderSummary() {
+    const t = DATA.treatments.find((x) => x.id === state.treatment);
+    $('#summary').innerHTML = `<span>${esc(t.name)}</span><span>${fmtDate(state.date)}</span><span>${fmtTime(state.time)}</span><span>From ${inr(t.priceFrom)}</span>`;
+  }
+
+  function startBooking(id) {
+    selectTreatment(id);
+    goStep(2); loadDays();
+    $('#book').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function gcalUrl(t, date, time) {
+    const [h, m] = time.split(':').map(Number);
+    const end = h * 60 + m + t.duration;
+    const p = (d, hh, mm) => `${d.replace(/-/g, '')}T${String(hh).padStart(2, '0')}${String(mm).padStart(2, '0')}00`;
+    const q = new URLSearchParams({
+      action: 'TEMPLATE', text: `${t.name} at ${DATA.clinic.name}`,
+      dates: `${p(date, h, m)}/${p(date, Math.floor(end / 60), end % 60)}`,
+      ctz: DATA.clinic.timezone, location: DATA.clinic.address,
+      details: `Call/WhatsApp: ${DATA.clinic.phone}`,
+    });
+    return `https://calendar.google.com/calendar/render?${q}`;
+  }
+
+  function wireBooking() {
+    document.addEventListener('click', (e) => {
+      const nb = e.target.closest('[data-book]'); if (nb) { e.preventDefault(); startBooking(nb.dataset.book); return; }
+      const nx = e.target.closest('[data-next]');
+      if (nx) { const n = Number(nx.dataset.next); goStep(n); if (n === 2) loadDays(); if (n === 3) renderSummary(); return; }
+      const pv = e.target.closest('[data-prev]'); if (pv) { goStep(Number(pv.dataset.prev)); return; }
+      const d = e.target.closest('.day'); if (d && !d.disabled) { pickDate(d.dataset.date); return; }
+      const tm = e.target.closest('.time');
+      if (tm) { state.time = tm.dataset.time; $$('.time').forEach((x) => x.classList.toggle('sel', x === tm)); $('[data-next="3"]').disabled = false; }
+    });
+
+    $('#estBook').addEventListener('click', (e) => {
+      const first = [...state.estimate.keys()][0];
+      if (first) { e.preventDefault(); startBooking(first); }
+    });
+
+    $('#bookForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = e.target, btn = $('#submitBtn');
+      $$('.field', f).forEach((x) => { x.classList.remove('err'); $('em', x) && ($('em', x).textContent = ''); });
+      $('#formError').textContent = '';
+      const payload = Object.fromEntries(new FormData(f));
+      Object.assign(payload, { treatment: state.treatment, date: state.date, time: state.time });
+      btn.disabled = true; btn.textContent = 'Booking…';
+      try {
+        const r = await api('/api/appointments', { method: 'POST', body: JSON.stringify(payload) });
+        const t = DATA.treatments.find((x) => x.id === state.treatment);
+        $('#doneText').textContent = `${t.name} on ${fmtDate(r.date)} at ${fmtTime(r.time)}. ${payload.email ? 'A confirmation is on its way to your inbox.' : 'Save your reference below.'}`;
+        $('#doneRef').textContent = `Booking ref · ${r.ref}`;
+        $('#gcalLink').href = gcalUrl(t, r.date, r.time);
+        $('#waLink').href = `https://wa.me/${DATA.clinic.whatsapp}?text=${encodeURIComponent(`Hi, my booking ref is ${r.ref} (${t.name}, ${fmtDate(r.date)} ${fmtTime(r.time)}).`)}`;
+        goStep('done'); f.reset(); loadNextSlot();
+      } catch (err) {
+        const fields = err.body?.fields || {};
+        for (const [k, msg] of Object.entries(fields)) {
+          const inp = f.elements[k];
+          if (inp) { inp.closest('.field').classList.add('err'); $('em', inp.closest('.field')).textContent = msg; }
+        }
+        $('#formError').textContent = fields.slot || fields.treatment || (Object.keys(fields).length ? '' : err.message);
+        if (err.status === 409) { goStep(2); pickDate(state.date); $('#times').insertAdjacentHTML('afterbegin', `<p class="form-error" style="grid-column:1/-1">${esc(err.message)}</p>`); }
+      } finally { btn.disabled = false; btn.textContent = 'Confirm booking'; }
+    });
+
+    $('#bookAnother').addEventListener('click', () => { state.treatment = null; $$('.tp').forEach((x) => x.classList.remove('sel')); $('[data-next="2"]').disabled = true; goStep(1); });
+  }
+
+  function wireCallback() {
+    $('#callbackForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = $('#cbMsg');
+      try {
+        await api('/api/callbacks', { method: 'POST', body: JSON.stringify(Object.fromEntries(new FormData(e.target))) });
+        msg.style.color = 'var(--mint)'; msg.textContent = "Thanks! We'll call you back shortly."; e.target.reset();
+      } catch (err) { msg.style.color = '#fb7185'; msg.textContent = err.message; }
+    });
+  }
+
+  async function loadNextSlot() {
+    try {
+      const { days } = await api('/api/availability?treatment=consult');
+      const d = days.find((x) => x.slots);
+      if (!d) { $('#nextSlot').textContent = 'Call to book'; return; }
+      const { slots } = await api(`/api/availability?treatment=consult&date=${d.date}`);
+      const today = days[0].date;
+      const label = d.date === today ? 'Today' : d.date === days[1].date ? 'Tomorrow' : fmtDate(d.date);
+      $('#nextSlot').textContent = `${label}, ${fmtTime(slots[0])}`;
+      // mini calendar in bento
+      $('#miniCal').innerHTML = days.map((x, i) => `<div class="${i === days.indexOf(d) ? 'pick' : x.slots ? 'on' : ''}">${new Date(x.date + 'T00:00:00').getDate()}</div>`).join('');
+    } catch { $('#nextSlot').textContent = 'Call to book'; }
+  }
+
+  // ---------- Effects ----------
+  function wireEffects() {
+    const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: 0.12 });
+    $$('.reveal').forEach((el) => io.observe(el));
+    $$('.b-card').forEach((c) => c.addEventListener('pointermove', (e) => {
+      const r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', `${e.clientX - r.left}px`); c.style.setProperty('--my', `${e.clientY - r.top}px`);
+    }));
+    $$('[data-icon]').forEach((el) => (el.innerHTML = icon(el.dataset.icon)));
+    const nav = $('.nav'), burger = $('.nav-burger');
+    burger.addEventListener('click', () => { const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
+    $$('.nav-links a').forEach((a) => a.addEventListener('click', () => nav.classList.remove('open')));
+  }
+
+  async function init() {
+    DATA = await api('/api/clinic');
+    bindClinic(); renderStats(); renderHours(); renderTabs(); renderTreatments(); renderPricing();
+    renderGuide(); renderTeam(); renderQuotes(); renderFaqs(); renderTreatPick();
+    wireBooking(); wireCallback(); wireEffects(); loadNextSlot();
+  }
+  init().catch((e) => console.error(e));
+})();
+</script>
+<script type="module">// Animated hero: a glossy 3D molar wrapped by a lime "protection" arrow that
+// spirals around it. The tooth sways and follows the pointer; the arrow draws
+// itself in on load, then orbits continuously.
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const host = document.getElementById('hero3d');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const small = matchMedia('(max-width: 760px)').matches;
+const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+
+// ---------- Tooth geometry ----------
+function crownGeometry() {
+  const g = new THREE.SphereGeometry(1, small ? 72 : 120, small ? 56 : 90);
+  const p = g.attributes.position;
+  const cusps = [[0.42, 0.36], [-0.42, 0.36], [0.42, -0.36], [-0.42, -0.36]];
+  for (let i = 0; i < p.count; i++) {
+    let x = p.getX(i), y = p.getY(i), z = p.getZ(i);
+    // Narrow the neck where the roots join.
+    const neck = 1 - 0.3 * smooth(0, 1, -y);
+    x *= 1.02 * neck; z *= 0.9 * neck;
+    y *= 0.74;
+    // Biting surface: four cusps around a central fissure.
+    if (y > 0) {
+      const w = smooth(0.25, 0.72, y);
+      let bump = 0;
+      for (const [cx, cz] of cusps) bump += Math.exp(-((x - cx) ** 2 + (z - cz) ** 2) / 0.09);
+      const fissure = Math.exp(-(x * x) / 0.012) * Math.exp(-(z * z) / 0.35) + Math.exp(-(z * z) / 0.012) * Math.exp(-(x * x) / 0.35);
+      y += w * (0.16 * bump - 0.12 * fissure - 0.1);
+    }
+    p.setXYZ(i, x, y, z);
+  }
+  g.computeVertexNormals();
+  return g;
+}
+
+function rootGeometry() {
+  const pts = [];
+  const n = 24;
+  for (let i = 0; i <= n; i++) {
+    const t = i / n; // 0 = top, 1 = tip
+    const r = 0.36 * Math.pow(1 - t, 0.62) + 0.035 * Math.sin(Math.PI * t);
+    pts.push(new THREE.Vector2(Math.max(r, 0.001), -t * 1.45));
+  }
+  const g = new THREE.LatheGeometry(pts, small ? 40 : 64);
+  g.scale(1, 1, 0.82);
+  return g;
+}
+
+// ---------- Protection arrow ----------
+function arrowCurve() {
+  const pts = [];
+  const turns = 1.72 * Math.PI;
+  for (let i = 0; i <= 80; i++) {
+    const u = i / 80, a = -0.4 + u * turns;
+    pts.push(new THREE.Vector3(1.78 * Math.cos(a), -1.05 + u * 1.95 + Math.sin(u * Math.PI) * 0.12, 1.42 * Math.sin(a)));
+  }
+  return new THREE.CatmullRomCurve3(pts);
+}
+
+function taperedTube(curve, segs, radial, radius) {
+  const g = new THREE.TubeGeometry(curve, segs, radius, radial, false);
+  const p = g.attributes.position, c = new THREE.Vector3(), v = new THREE.Vector3();
+  for (let i = 0; i < p.count; i++) {
+    const u = Math.floor(i / (radial + 1)) / segs;
+    curve.getPointAt(u, c);
+    v.fromBufferAttribute(p, i).sub(c).multiplyScalar(0.15 + 0.85 * smooth(0, 0.75, u)).add(c);
+    p.setXYZ(i, v.x, v.y, v.z);
+  }
+  g.computeVertexNormals();
+  return g;
+}
+
+function init() {
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, small ? 1.75 : 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.0;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  host.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+
+  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+  camera.position.set(0, 0.2, 7.4);
+
+  const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(3, 5, 4); scene.add(key);
+  const fill = new THREE.DirectionalLight(0xdfe7f2, 0.5); fill.position.set(-4, 1, 2); scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xe2ff7a, 1.6); rim.position.set(-3, -2, -4); scene.add(rim);
+
+  const root = new THREE.Group();
+  root.position.y = 0.32;
+  root.scale.setScalar(0.84);
+  scene.add(root);
+
+  // Tooth
+  const enamel = new THREE.MeshPhysicalMaterial({
+    color: 0xeff2f6, roughness: 0.2, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.05,
+    sheen: 0.6, sheenColor: 0xffffff, iridescence: 0.12, iridescenceIOR: 1.3,
+  });
+  const rootMat = enamel.clone(); rootMat.color.set(0xf1efe8); rootMat.roughness = 0.28;
+  const tooth = new THREE.Group();
+  const crown = new THREE.Mesh(crownGeometry(), enamel);
+  crown.position.y = 0.45;
+  tooth.add(crown);
+  const rg = rootGeometry();
+  [[-0.34, 0.13], [0.34, -0.13]].forEach(([x, tilt]) => {
+    const r = new THREE.Mesh(rg, rootMat);
+    r.position.set(x, 0.1, 0);
+    r.rotation.z = tilt;
+    tooth.add(r);
+  });
+  tooth.rotation.x = 0.18;
+  root.add(tooth);
+
+  // Arrow
+  const lime = new THREE.MeshPhysicalMaterial({ color: 0xb4e41f, emissive: 0x3d5c00, emissiveIntensity: 0.3, roughness: 0.12, metalness: 0.1, clearcoat: 1, clearcoatRoughness: 0.04 });
+  const curve = arrowCurve();
+  const SEGS = 260, RADIAL = 20;
+  const tubeGeo = taperedTube(curve, SEGS, RADIAL, 0.1);
+  const tube = new THREE.Mesh(tubeGeo, lime);
+  const head = new THREE.Mesh(new THREE.ConeGeometry(0.25, 0.52, 40), lime);
+  const end = curve.getPointAt(1), tan = curve.getTangentAt(1);
+  head.position.copy(end).addScaledVector(tan, 0.18);
+  head.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), tan);
+  const arrow = new THREE.Group();
+  arrow.add(tube, head);
+  arrow.rotation.set(0.32, 0, -0.16);
+  root.add(arrow);
+  const fullIndex = tubeGeo.index.count;
+
+  // Soft contact shadow under the tooth
+  const sc = document.createElement('canvas'); sc.width = sc.height = 128;
+  const sx = sc.getContext('2d'), grd = sx.createRadialGradient(64, 64, 0, 64, 64, 64);
+  grd.addColorStop(0, 'rgba(15,16,18,0.55)'); grd.addColorStop(1, 'rgba(15,16,18,0)');
+  sx.fillStyle = grd; sx.fillRect(0, 0, 128, 128);
+  const shadow = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 2.6), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(sc), transparent: true, depthWrite: false, opacity: 0.35 }));
+  shadow.rotation.x = -Math.PI / 2; shadow.position.y = -1.9; shadow.scale.set(1, 0.45, 1);
+  root.add(shadow);
+
+  // Shield ring + sparkles
+  const chrome = new THREE.MeshPhysicalMaterial({ color: 0xf2f4f7, metalness: 1, roughness: 0.12, clearcoat: 1 });
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(2.05, 0.012, 12, 240), chrome);
+  ring.rotation.set(1.3, 0.2, -0.25);
+  root.add(ring);
+  const sparkMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 1.2 });
+  const sparkles = [[-1.3, 1.25, 0.6], [1.45, 0.95, 0.3], [1.1, -1.25, 0.8], [-1.55, -0.4, -0.4]].map((pos, i) => {
+    const s = new THREE.Mesh(new THREE.OctahedronGeometry(0.07, 0), sparkMat);
+    s.scale.set(0.55, 1.8, 0.55);
+    s.position.set(...pos);
+    s.userData.phase = i * 1.7;
+    root.add(s);
+    return s;
+  });
+
+  function resize() {
+    const w = host.clientWidth, h = host.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.position.z = w / h < 1 ? 7.4 / (w / h) * 0.86 : 7.4;
+    camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(resize).observe(host);
+  resize();
+
+  const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
+  addEventListener('pointermove', (e) => { pointer.tx = (e.clientX / innerWidth - 0.5) * 2; pointer.ty = (e.clientY / innerHeight - 0.5) * 2; }, { passive: true });
+  let visible = true;
+  new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(host);
+
+  function pose(t) {
+    pointer.x += (pointer.tx - pointer.x) * 0.05;
+    pointer.y += (pointer.ty - pointer.y) * 0.05;
+    tooth.rotation.y = Math.sin(t * 0.45) * 0.65 + pointer.x * 0.4;
+    tooth.position.y = Math.sin(t * 0.9) * 0.07;
+    shadow.material.opacity = 0.35 - Math.sin(t * 0.9) * 0.06;
+    root.rotation.x = pointer.y * 0.15;
+    arrow.rotation.y = t * 0.75;
+    ring.rotation.z = -0.25 + t * 0.12;
+    // Draw the arrow in during the first 1.6s, then show its head.
+    const grow = reduced ? 1 : smooth(0.1, 1.6, t);
+    tubeGeo.setDrawRange(0, Math.floor(fullIndex * grow / (RADIAL * 6)) * RADIAL * 6);
+    head.visible = grow > 0.98;
+    sparkles.forEach((s) => { const k = 0.4 + 0.6 * Math.max(0, Math.sin(t * 2 + s.userData.phase)); s.scale.set(0.55 * k, 1.8 * k, 0.55 * k); s.rotation.y = t; });
+  }
+
+  const clock = new THREE.Clock();
+  function frame() {
+    requestAnimationFrame(frame);
+    if (!visible) return;
+    pose(clock.getElapsedTime());
+    renderer.render(scene, camera);
+  }
+  if (reduced) { pose(2); renderer.render(scene, camera); } else frame();
+  host.classList.add('ready');
+}
+
+try { init(); } catch (e) { console.warn('3D hero unavailable, using fallback', e); }
+</script>
+
+<div class="demo-pill" aria-label="This is a demo website">DEMO</div>
+</body>
+</html>
