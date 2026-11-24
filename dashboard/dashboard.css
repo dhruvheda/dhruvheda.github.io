@@ -249,6 +249,14 @@ label.f small { color: var(--muted); font-weight: 400; }
 .msg p { color: var(--ink-2); font-size: 13.5px; white-space: pre-line; }
 .msg small { color: var(--muted); font-size: 12px; }
 
+.demo-switch { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 70; display: flex; align-items: center; gap: 4px; padding: 5px; border-radius: 999px; background: #0f1012; box-shadow: 0 18px 40px -14px rgba(15,16,18,.65); font: 500 13.5px/1 'Inter', system-ui, sans-serif; white-space: nowrap; max-width: calc(100vw - 24px); }
+.demo-switch span { color: #d4f45a; font-weight: 700; letter-spacing: .1em; font-size: 10.5px; padding: 0 8px 0 10px; text-transform: uppercase; }
+.demo-switch a { color: #c4c7cc; padding: 10px 15px; border-radius: 999px; text-decoration: none; transition: color .15s, background .15s; }
+.demo-switch a:hover { color: #fff; }
+.demo-switch a.on { background: #d4f45a; color: #0f1012; font-weight: 600; }
+@media (max-width: 420px) { .demo-switch span { display: none; } .demo-switch a { padding: 10px 12px; font-size: 13px; } }
+.has-switch .toast { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
+
 /* Toast */
 .toast { position: fixed; z-index: 95; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 14px; box-shadow: var(--shadow); font-size: 14px; max-width: calc(100vw - 32px); animation: pop .2s ease both; }
 .toast b { color: var(--lime); }

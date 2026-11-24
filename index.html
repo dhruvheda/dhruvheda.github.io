@@ -467,7 +467,9 @@ a.cs-item:hover { border-color: var(--ink); transform: translateY(-2px); }
   .wordmark { font-size: 16.5vw; }
   .hero-3d { position: relative; left: auto; top: auto; transform: none; width: 100%; height: 360px; margin: -40px 0 -10px; }
   .hero-meta-l, .slot-chip, .hero-copy { position: relative; left: auto; right: auto; top: auto; bottom: auto; }
-  .hero-meta-l { padding: 0 22px; display: flex; align-items: center; gap: 14px; }
+  .hero-meta-l { padding: 0 22px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px 14px; }
+  .hero-meta-l small { flex: 1 1 150px; }
+  .hero-meta-l .sample { margin-top: 0; }
   .hero-meta-l small { margin: 0; }
   .slot-chip { margin: 16px 22px 0; align-self: flex-start; }
   .hero-copy { padding: 22px 22px 0; max-width: none; }
@@ -513,6 +515,13 @@ a.cs-item:hover { border-color: var(--ink); transform: translateY(-2px); }
   background: repeating-linear-gradient(45deg, #1a1c1f 0 14px, #1e2023 14px 28px); }
 .map-link span { color: #9599a0; font-size: 14px; }
 .map-link b { color: var(--lime); font-size: 18px; }
+.demo-switch { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 70; display: flex; align-items: center; gap: 4px; padding: 5px; border-radius: 999px; background: #0f1012; box-shadow: 0 18px 40px -14px rgba(15,16,18,.65); font: 500 13.5px/1 'Inter', system-ui, sans-serif; white-space: nowrap; max-width: calc(100vw - 24px); }
+.demo-switch span { color: #d4f45a; font-weight: 700; letter-spacing: .1em; font-size: 10.5px; padding: 0 8px 0 10px; text-transform: uppercase; }
+.demo-switch a { color: #c4c7cc; padding: 10px 15px; border-radius: 999px; text-decoration: none; transition: color .15s, background .15s; }
+.demo-switch a:hover { color: #fff; }
+.demo-switch a.on { background: #d4f45a; color: #0f1012; font-weight: 600; }
+@media (max-width: 420px) { .demo-switch span { display: none; } .demo-switch a { padding: 10px 12px; font-size: 13px; } }
+.has-switch .wa-fab { bottom: calc(82px + env(safe-area-inset-bottom, 0px)); }
 .demo-pill { position: fixed; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 40; padding: 6px 12px; border-radius: 999px; background: var(--ink); color: var(--lime); font: 600 12px/1 var(--font); letter-spacing: .04em; box-shadow: var(--shadow); }
 </style>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
@@ -1467,6 +1476,7 @@ function init() {
 try { init(); } catch (e) { console.warn('3D hero unavailable, using fallback', e); }
 </script>
 
-<div class="demo-pill" aria-label="This is a demo website">DEMO</div>
+<nav class="demo-switch" aria-label="Switch demo view"><span>Demo</span><a class="on" href="./" aria-current="page">Patient website</a><a href="dashboard/">Clinic dashboard</a></nav>
+<script>document.body.classList.add('has-switch')</script>
 </body>
 </html>
